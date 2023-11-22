@@ -2,8 +2,16 @@
 import { RouterLink, RouterView } from "vue-router";
 </script>
 <template>
-  <h1>Hello ashyo</h1>
-  <RouterView />
+  <div>
+    <h1>Hello ashyo</h1>
+    <RouterView />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+</style>
