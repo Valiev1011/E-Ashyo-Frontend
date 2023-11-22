@@ -6,7 +6,7 @@ const router = createRouter({
     {
       path: "/",
       name: "homepage",
-      component: () => import("../pages/home/homePage.vue"),
+      component: () => import("../layouts/MainLayout.vue"),
     },
     {
       path: "/syoma-top",
