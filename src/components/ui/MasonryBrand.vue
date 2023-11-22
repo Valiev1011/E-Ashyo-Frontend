@@ -1,5 +1,7 @@
 <template>
-  <div class="w-[1180px] h-[275px] flex gap-[10px]">
+  <div
+    class="w-[1180px] container mx-auto h-[275px] flex gap-[10px] mt-[100px]"
+  >
     <div class="base">
       <div class="short" style="background-color: rgba(103, 180, 55, 0.2)">
         <img src="../../assets/artel.png" alt="logo" />
@@ -41,42 +43,42 @@
 <script setup lang="ts"></script>
 
 <style scoped>
-  .base {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .short {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    width: 310px;
-    height: 98px;
-    border-radius: 6px;
-  }
-  .tall {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    cursor: pointer;
-    width: 310px;
-    height: 165px;
-  }
-  .last {
-    width: 220px;
-    height: 228px;
-  }
-  .last2 {
-    width: 220px;
-    height: 35px;
-    border-radius: 6px;
-    color: var(--primary-p-1, #134e9b);
-    font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 130%;
-  }
+.base {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.short {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 310px;
+  height: 98px;
+  border-radius: 6px;
+}
+.tall {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 310px;
+  height: 165px;
+}
+.last {
+  width: 220px;
+  height: 228px;
+}
+.last2 {
+  width: 220px;
+  height: 35px;
+  border-radius: 6px;
+  color: var(--primary-p-1, #134e9b);
+  font-family: Roboto;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+}
 </style>
