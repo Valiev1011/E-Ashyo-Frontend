@@ -104,7 +104,7 @@
 <style scoped>
   .wide {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     width: 444px;
     height: 248px;
     border-radius: 7px;
