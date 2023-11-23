@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-[100%] mb-[70px] mt-[70px] items-start justify-center">
-    <div class="w-[1180px] flex justify-between">
+    <div class="w-[1180px] flex gap-[100px]">
       <div class="flex-col">
         <h2 class="font-bold mb-4">Bizning ijtimoiy tarmoqlarda</h2>
         <div class="flex gap-2">
@@ -64,7 +64,7 @@
         <p>Savolingiz bormi?</p>
         <input
           type="text"
-          class="mt-2 rounded-lg bg-[#ededed] w-[314px] h-[54px] outline-none font-[12px] px-[20px]"
+          class="mt-2 rounded-lg bg-[#ededed] w-[270px] h-[54px] outline-none font-[12px] px-[20px]"
           placeholder="O'zingiz qiztirgan savollarni bering?"
         />
       </div>
@@ -73,6 +73,7 @@
 </template>
 
 <script setup lang="ts">
+//@ts-ignore
 import Icon from "@jamescoyle/vue-icon";
 import {
   mdiFacebook,

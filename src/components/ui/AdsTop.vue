@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10 relative w-screen">
+  <div class="mt-6 relative w-screen">
     <carousel
       :items-to-show="1"
       :autoplay="5000"
@@ -38,7 +38,7 @@
 
       <template #addons>
         <div
-          class="absolute bottom-[60px] w-[100%] flex items-center justify-center"
+          class="absolute bottom-[60px] w-[100%] flex items-center justify-center rounded-md"
         >
           <div class="w-[1180px] flex items-start">
             <pagination />
@@ -55,6 +55,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import "vue3-carousel/dist/carousel.css";
+//@ts-ignore
 import { Carousel, Navigation, Slide, Pagination } from "vue3-carousel";
 
 const imgs = ref([
@@ -84,4 +85,10 @@ const imgs = ref([
   },
 ]);
 </script>
-<style scoped></style>
+<style scoped>
+/* .carousel__pagination-button {
+  border-radius: 50%;
+  background-color: red;
+  color: red;
+} */
+</style>

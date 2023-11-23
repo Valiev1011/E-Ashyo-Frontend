@@ -67,11 +67,11 @@
   height: 165px;
 }
 .last {
-  width: 220px;
+  width: 200px;
   height: 228px;
 }
 .last2 {
-  width: 220px;
+  width: 200px;
   height: 35px;
   border-radius: 6px;
   color: var(--primary-p-1, #134e9b);
