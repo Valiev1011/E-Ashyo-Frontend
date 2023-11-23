@@ -30,6 +30,11 @@ const router = createRouter({
       name: "footer",
       component: () => import("../components/footer/TheFooter.vue"),
     },
+    {
+      path: "/product",
+      name: "product",
+      component: () => import("../pages/product/productPage.vue"),
+    },
   ],
 });
 
