@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h1>home page</h1>
-    <MainLayout>
-      <router-view></router-view>
-    </MainLayout>
+    <MasonryBrand></MasonryBrand>
+    <MasonryCategory></MasonryCategory>
   </div>
 </template>
 
 <script setup lang="ts">
 import MainLayout from "../../layouts/MainLayout.vue";
+import MasonryBrand from "../../components/ui/MasonryBrand.vue";
+import MasonryCategory from "../../components/ui/MasonryCategory.vue";
 </script>
 
 <style scoped></style>

@@ -6,7 +6,29 @@ const router = createRouter({
     {
       path: "/",
       name: "homepage",
-      component: () => import("../pages/home/homePage.vue"),
+      component: () => import("../layouts/MainLayout.vue"),
+      children: [
+        {
+          path: "/",
+          name: "home",
+          component: () => import("../pages/home/homePage.vue"),
+        },
+      ],
+    },
+    {
+      path: "/syoma-top",
+      name: "syoma_ads",
+      component: () => import("../components/ui/AdsTop.vue"),
+    },
+    {
+      path: "/syoma-bottom",
+      name: "syoma_ads_bottom",
+      component: () => import("../components/ui/AdsBottom.vue"),
+    },
+    {
+      path: "/footer",
+      name: "footer",
+      component: () => import("../components/footer/TheFooter.vue"),
     },
     {
       path: "/product",
