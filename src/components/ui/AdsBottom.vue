@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full items-center justify-center mt-[50px] pb-[80px] mb-[4%]">
+  <div
+    class="w-full items-center justify-center mt-[50px] pb-[80px] px-[45px] mb-[4%]"
+  >
     <div class="main flex w-full flex-row justify-evenly relative">
       <img class="ear" src="../../assets/img/ear.png" alt="EarPhone" />
 
