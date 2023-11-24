@@ -4,10 +4,10 @@ export const cartStore = defineStore("cart", {
     items: [],
   }),
   actions: {
-    deleteCartItem(id) {
+    deleteCartItem(id: any) {
       let products = JSON.parse(localStorage.getItem("products") as string);
 
-      const arr = products.filter((obj: any, indx: any) => {
+      const arr = products.filter((obj: any) => {
         if (obj.id == id) {
           return false;
         } else {
@@ -16,23 +16,29 @@ export const cartStore = defineStore("cart", {
       });
 
       localStorage.setItem("products", JSON.stringify(arr));
-      
+
       this.items = arr;
       return this.items;
     },
     getCart() {
       this.items = JSON.parse(localStorage.getItem("products") as string);
     },
-    addItem(id) {
-      this.items.forEach((item) => (item.id == id ? item.quantity++ : true));
+    addItem(id: any) {
+      this.items.forEach((item: any) =>
+        item.id == id ? item.quantity++ : true
+      );
       localStorage.setItem("products", JSON.stringify(this.items));
     },
-    removeItem(id) {
-      this.items.forEach((item) => (item.id == id ? item.quantity-- : true));
+    removeItem(id: any) {
+      this.items.forEach((item: any) =>
+        item.id == id ? item.quantity-- : true
+      );
       localStorage.setItem("products", JSON.stringify(this.items));
     },
-    getItem(id) {
-      const item = this.items.filter((item) => (item.id == id ? true : false));
+    getItem(id: any) {
+      const item = this.items.filter((item: any) =>
+        item.id == id ? true : false
+      );
       return item;
     },
   },
