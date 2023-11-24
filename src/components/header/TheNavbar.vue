@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-10 container mx-auto">
+  <div class="w-full container mx-auto">
     <div class="w-full flex justify-between bg-[#EBEFF3] px-20">
       <div
         class="w-full flex gap-5 text-[#545D6A] font-sans text-[14px] font-normal border"
@@ -39,7 +39,7 @@
         </span>
       </div>
     </div>
-    <div class="w-full mb-10 flex gap-14 px-20">
+    <div class="w-full mb-6 mt-6 flex gap-14 pl-16">
       <div class="w-1/6 flex relative items-center">
         <img src="../../components/icons/Group 48097269.svg" alt="group img" />
         <h1
@@ -48,38 +48,7 @@
           Ashyo
         </h1>
       </div>
-      <div class="w-3/6 flex items-center">
-        <!-- <div class="items-center justify-center bg-[#134E9B] rounded-md">
-
-          <div class="open_menu flex">
-            <div @click="clicked">
-              <p>kategoriya</p>
-              <svg-icon
-                type="mdi"
-                :path="mdiChevronDown"
-                :class="
-                  open
-                    ? 'text-black cursor-pointer hover:rotate-180 duration-300'
-                    : ''
-                "
-              ></svg-icon>
-            </div>
-            <div
-              class="sub_menu absolute border border-color1 flex flex-col duration-100 rounded-md w-[100px] items-center bg-white text-color1"
-            >
-              <span
-                class="text-[18px] duration-100 w-full text-center hover:bg-color1 hover:text-[green] cursor-pointer select-none"
-                >nmadur</span
-              >
-              <span
-                @click="logout"
-                class="text-[18px] duration-100 w-full text-center hover:bg-color1 hover:text-[green] cursor-pointer select-none"
-                >yana nmadur</span
-              >
-            </div>
-          </div>
-        </div> -->
-
+      <div class="w-3/6 flex items-center gap-3 mr-6">
         <div
           class="items-center justify-center bg-[#134E9B] rounded-md px-3 py-3"
         >
@@ -133,14 +102,77 @@
             <!-- <button @click="closeModal">Close</button> -->
           </div>
         </div>
+        <div class="flex">
+          <form action="#">
+            <input
+              type="text"
+              class="border rounded-l-md bg-[#EBEFF3] pr-56 pl-10 pt-3 pb-3 outline-none"
+              placeholder="What are you looking for?"
+            />
+          </form>
+          <button
+            class="items-center justify-center bg-[#134E9B] w-16 px-6 py-2 rounded-r-md"
+          >
+            <img src="../../components/icons/u_search.svg" alt="img search" />
+          </button>
+        </div>
       </div>
+      <div class="w-2/6 flex items-center gap-3">
+        <div class="flex w-full gap-3">
+          <div class="bg-[#EBEFF3] p-3 rounded-md">
+            <svg-icon
+              type="mdi"
+              :path="mdiScaleUnbalanced"
+              class="text-black cursor-pointer"
+            ></svg-icon>
+          </div>
+          <div class="bg-[#EBEFF3] p-3 rounded-md">
+            <svg-icon
+              type="mdi"
+              :path="mdiHeartOutline"
+              class="text-black cursor-pointer"
+            ></svg-icon>
+          </div>
+          <div class="bg-[#EBEFF3] p-3 rounded-md">
+            <svg-icon
+              type="mdi"
+              :path="mdiShoppingOutline"
+              class="text-black cursor-pointer"
+            ></svg-icon>
+          </div>
+          <div class="bg-[#EBEFF3] p-3 rounded-md">
+            <svg-icon
+              type="mdi"
+              :path="mdiAccountOutline"
+              class="text-black cursor-pointer"
+            ></svg-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-full flex gap-3">
+      <ol class="flex gap-9 pl-20">
+        <li
+          v-for="item in categories"
+          :key="item.id"
+          class="text-[#545D6A] hover:underline hover:text-black"
+        >
+          {{ item.name }}
+        </li>
+      </ol>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
   import { ref, reactive } from "vue";
-  import { mdiChevronDown } from "@mdi/js";
+  import {
+    mdiChevronDown,
+    mdiScaleUnbalanced,
+    mdiHeartOutline,
+    mdiShoppingOutline,
+    mdiAccountOutline,
+  } from "@mdi/js";
   //@ts-ignore
   import SvgIcon from "@jamescoyle/vue-icon";
 
@@ -176,7 +208,7 @@
     },
     {
       id: 2,
-      name: "Smartfonlar va Aksasuerlar",
+      name: "Smartfonlar",
       icon: "bi_phone",
       bool: false,
     },

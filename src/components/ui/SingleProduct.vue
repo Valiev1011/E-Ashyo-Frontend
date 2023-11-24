@@ -197,6 +197,9 @@
       </div>
     </div>
   </div>
+  <div>
+    <ProductPage />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -212,9 +215,10 @@
   import SvgIcon from "@jamescoyle/vue-icon";
 
   import { ref, reactive } from "vue";
+  import ProductPage from "@/pages/product/productPage.vue";
 
   const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
-  const price: any = ref("2470000");
+  const price = ref("2470000");
   const isHovered = ref(false);
   const isActive = ref(false);
 
@@ -224,16 +228,6 @@
     "http://localhost:5173/src/assets/single_phone.png",
     "http://localhost:5173/src/assets/single_phone.png",
   ]);
-
-  const toStorage = () => {
-    const products = [
-      { id: 1, quantity: 1 },
-      { id: 2, quantity: 1 },
-      { id: 3, quantity: 1 },
-      { id: 4, quantity: 1 },
-    ];
-    localStorage.setItem("products", JSON.stringify(products));
-  };
 
   const characteristic = reactive([{ name: "Brand", value: "Vivo" }]);
 
