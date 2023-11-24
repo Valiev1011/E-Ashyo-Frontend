@@ -5,13 +5,17 @@
     <div
       class="bg-[#EBEFF3] w-[250px] flex items-center justify-center flex-col p-5 rounded-[8px]"
     >
-      <div class="flex bg-gray justify-around w-[300px]">
+      <div class="flex bg-gray gap-[120px] w-[300px] px-10">
         <p v-if="props.item.sale" class="bg-[#FFF] text-[#E81504] rounded p-1">
           Aksiyada
         </p>
-        <p v-else></p>
-        <button @click="like=!like" v-if="!like" ><SvgIcon type="mdi" :path="mdiHeartOutline"/></button>
-        <button @click="like=!like" v-else><SvgIcon type="mdi" :path="mdiCardsHeart" class="text-[red]"/></button>
+        <p v-else class="p-[15px] w-[100px]"></p>
+        <button @click="like = !like" v-if="!like">
+          <SvgIcon type="mdi" :path="mdiHeartOutline" />
+        </button>
+        <button @click="like = !like" v-else>
+          <SvgIcon type="mdi" :path="mdiCardsHeart" class="text-[red]" />
+        </button>
       </div>
       <img
         :src="props.item.image"
@@ -49,9 +53,9 @@ import shop_bag from "../../assets/shopping-bag.vue";
 import tarozi from "../../assets/la_balance-scale-right.vue";
 import heart from "../../assets/heart.vue";
 // @ts-ignore
-import SvgIcon from "@jamescoyle/vue-icon"
-import {mdiHeartOutline, mdiCardsHeart} from "@mdi/js"
-let like = ref(false)
+import SvgIcon from "@jamescoyle/vue-icon";
+import { mdiHeartOutline, mdiCardsHeart } from "@mdi/js";
+let like = ref(false);
 
 const props = defineProps({
   item: {
