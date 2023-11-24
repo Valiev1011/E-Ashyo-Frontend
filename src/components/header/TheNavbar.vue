@@ -139,138 +139,138 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
-import { mdiChevronDown } from "@mdi/js";
-//@ts-ignore
-import SvgIcon from "@jamescoyle/vue-icon";
+  import { ref, reactive } from "vue";
+  import { mdiChevronDown } from "@mdi/js";
+  //@ts-ignore
+  import SvgIcon from "@jamescoyle/vue-icon";
 
-const value = ref();
-const options = [{ value: "smart", label: "smart" }];
-const open = ref(false);
+  const value = ref();
+  const options = [{ value: "smart", label: "smart" }];
+  const open = ref(false);
 
-const clicked = () => {
-  open.value = !open.value;
-  console.log(open.value);
-};
+  const clicked = () => {
+    open.value = !open.value;
+    console.log(open.value);
+  };
 
-// const rotate = (e: any) => {
-//   open.value = !open.value;
-//   if (open.value) {
-//     console.log((e.target.style.rotate = "180deg"));
-//   } else {
-//     console.log((e.target.style.rotate = "0deg"));
-//   }
-// };
+  // const rotate = (e: any) => {
+  //   open.value = !open.value;
+  //   if (open.value) {
+  //     console.log((e.target.style.rotate = "180deg"));
+  //   } else {
+  //     console.log((e.target.style.rotate = "0deg"));
+  //   }
+  // };
 
-// const logout = () => {
-//   console.log("nmadur");
-// };
+  // const logout = () => {
+  //   console.log("nmadur");
+  // };
 
-const isModalOpen = ref(false);
-const categories = ref([
-  {
-    id: 1,
-    name: "Aksiyalar",
-    icon: "u_money-withdrawal",
-    bool: false,
-  },
-  {
-    id: 2,
-    name: "Smartfonlar va Aksasuerlar",
-    icon: "bi_phone",
-    bool: false,
-  },
-  {
-    id: 3,
-    name: "Kiryuvish mashinalari",
-    icon: "Frame_48097311",
-    bool: false,
-  },
-  {
-    id: 4,
-    name: "Telivizorlar",
-    icon: "Frame_48097329",
-    bool: false,
-  },
-  {
-    id: 5,
-    name: "Kondetsionerlar",
-    icon: "iconoir_air-conditioner",
-    bool: false,
-  },
-  {
-    id: 6,
-    name: "Kompuyert va jihozlari",
-    icon: "bi_laptop",
-    bool: false,
-  },
-  {
-    id: 7,
-    name: "Muzlatgichlar",
-    icon: "arcticons_freezer",
-    bool: false,
-  },
-  {
-    id: 8,
-    name: "Chang yutgichlar",
-    icon: "iconoir_washing-machine",
-    bool: false,
-  },
-]);
+  const isModalOpen = ref(false);
+  const categories = ref([
+    {
+      id: 1,
+      name: "Aksiyalar",
+      icon: "u_money-withdrawal",
+      bool: false,
+    },
+    {
+      id: 2,
+      name: "Smartfonlar va Aksasuerlar",
+      icon: "bi_phone",
+      bool: false,
+    },
+    {
+      id: 3,
+      name: "Kiryuvish mashinalari",
+      icon: "Frame_48097311",
+      bool: false,
+    },
+    {
+      id: 4,
+      name: "Telivizorlar",
+      icon: "Frame_48097329",
+      bool: false,
+    },
+    {
+      id: 5,
+      name: "Kondetsionerlar",
+      icon: "iconoir_air-conditioner",
+      bool: false,
+    },
+    {
+      id: 6,
+      name: "Kompuyert va jihozlari",
+      icon: "bi_laptop",
+      bool: false,
+    },
+    {
+      id: 7,
+      name: "Muzlatgichlar",
+      icon: "arcticons_freezer",
+      bool: false,
+    },
+    {
+      id: 8,
+      name: "Chang yutgichlar",
+      icon: "iconoir_washing-machine",
+      bool: false,
+    },
+  ]);
 
-const attributes = ref([
-  { id: 1, name: "Oppo smartfonlar" },
-  { id: 1, name: "Vivo smartfonlar" },
-  { id: 1, name: "Realmi smartfonlar" },
-  { id: 1, name: "Redmi smartfonlar" },
-  { id: 1, name: "Xiaomi smartfonlar" },
-  { id: 1, name: "Artel smartfonlar" },
-  { id: 1, name: "Samasung smartfonlar" },
-  { id: 1, name: "Iphone smartfonlar" },
-  { id: 1, name: "Nokia smartfonlar" },
-]);
+  const attributes = ref([
+    { id: 1, name: "Oppo smartfonlar" },
+    { id: 1, name: "Vivo smartfonlar" },
+    { id: 1, name: "Realmi smartfonlar" },
+    { id: 1, name: "Redmi smartfonlar" },
+    { id: 1, name: "Xiaomi smartfonlar" },
+    { id: 1, name: "Artel smartfonlar" },
+    { id: 1, name: "Samasung smartfonlar" },
+    { id: 1, name: "Iphone smartfonlar" },
+    { id: 1, name: "Nokia smartfonlar" },
+  ]);
 
-const toggleModal = () => {
-  isModalOpen.value = !isModalOpen.value;
-};
+  const toggleModal = () => {
+    isModalOpen.value = !isModalOpen.value;
+  };
 
-const closeModal = () => {
-  isModalOpen.value = false;
-};
+  const closeModal = () => {
+    isModalOpen.value = false;
+  };
 </script>
 
 <style scoped>
-.kategoriya {
-  background-color: #134e9b;
-}
+  .kategoriya {
+    background-color: #134e9b;
+  }
 
-.sub_menu {
-  visibility: hidden;
-  top: 45px;
-  opacity: 0;
-}
-.open_menu:hover .sub_menu {
-  top: 100px;
-  opacity: 1;
-  visibility: visible;
-}
+  .sub_menu {
+    visibility: hidden;
+    top: 45px;
+    opacity: 0;
+  }
+  .open_menu:hover .sub_menu {
+    top: 100px;
+    opacity: 1;
+    visibility: visible;
+  }
 
-.open-modal {
-  border-radius: 50%;
-  /* background-color: #ff9900; */
-  color: #fff;
-}
+  .open-modal {
+    border-radius: 50%;
+    /* background-color: #ff9900; */
+    color: #fff;
+  }
 
-.categories-list {
-  position: absolute;
-  top: 100px;
-  left: 100px;
-  /* width: 100%; */
-  /* right: 180px; */
+  .categories-list {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    /* width: 100%; */
+    /* right: 180px; */
 
-  background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-}
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+  }
 </style>

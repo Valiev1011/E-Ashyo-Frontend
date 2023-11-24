@@ -62,7 +62,7 @@
             {{ to_number(price) }}
           </h3>
           <h3 class="text-[24px] font-bold not-italic leading-[118%] pb-[2px]">
-            USZ
+            UZS
           </h3>
         </div>
 
@@ -78,6 +78,7 @@
         <div class="flex mt-[10px] gap-[14px] flex-row">
           <button
             class="border border-[#134E9B] w-[230px] h-[56px] rounded-[6px]"
+            @click="toStorage"
           >
             <p
               class="text-[16px] font-normal text-center not-italic leading-[130%] text-[#134E9B]"
@@ -207,12 +208,13 @@
     mdiClockOutline,
     mdiAccountOutline,
   } from "@mdi/js";
+  //@ts-ignore
   import SvgIcon from "@jamescoyle/vue-icon";
 
   import { ref, reactive } from "vue";
 
   const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
-  const price = ref("2470000");
+  const price: any = ref("2470000");
   const isHovered = ref(false);
   const isActive = ref(false);
 
@@ -222,6 +224,16 @@
     "http://localhost:5173/src/assets/single_phone.png",
     "http://localhost:5173/src/assets/single_phone.png",
   ]);
+
+  const toStorage = () => {
+    const products = [
+      { id: 1, quantity: 1 },
+      { id: 2, quantity: 1 },
+      { id: 3, quantity: 1 },
+      { id: 4, quantity: 1 },
+    ];
+    localStorage.setItem("products", JSON.stringify(products));
+  };
 
   const characteristic = reactive([{ name: "Brand", value: "Vivo" }]);
 
