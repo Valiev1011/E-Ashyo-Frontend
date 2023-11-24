@@ -82,14 +82,28 @@
   ]);
 </script>
 <style>
-  /* .carousel__pagination-button {
+.carousel__pagination {
+  display: flex;
+  align-items: center;
+}
+.carousel__pagination-button::after {
+  width: 18px;
+  height: 18px;
+  background-color: white;
   border-radius: 50%;
-  background-color: red;
-  color: red;
-} */
-  .carousel__icon {
-    width: var(--vc-icn-width);
-    height: var(--vc-icn-width);
-    fill: currentColor;
-  }
+}
+.carousel__pagination-button--active::after {
+  width: 48px;
+  height: 48px;
+  background-color: #95bef3;
+  border: 15px solid white;
+  border-radius: 50%;
+  position: relative;
+}
+.carousel__pagination-button:hover::after {
+  background-color: #95bef3;
+  border-radius: 50%;
+  color: #e6e6e6;
+}
+
 </style>
