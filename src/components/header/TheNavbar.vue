@@ -124,6 +124,7 @@
               type="mdi"
               :path="mdiScaleUnbalanced"
               class="text-black cursor-pointer"
+              @click="gotoScaleUnbalanced"
             ></svg-icon>
           </div>
           <div class="bg-[#EBEFF3] p-3 rounded-md">
@@ -175,6 +176,10 @@ import {
 } from "@mdi/js";
 //@ts-ignore
 import SvgIcon from "@jamescoyle/vue-icon";
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
 
 const value = ref();
 const options = [{ value: "smart", label: "smart" }];
@@ -197,6 +202,10 @@ const clicked = () => {
 // const logout = () => {
 //   console.log("nmadur");
 // };
+
+const gotoScaleUnbalanced = () => {
+  router.push('/comparison');
+}
 
 const isModalOpen = ref(false);
 const categories = ref([

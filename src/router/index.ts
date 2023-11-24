@@ -13,6 +13,11 @@ const router = createRouter({
           name: "home",
           component: () => import("../pages/home/homePage.vue"),
         },
+        {
+          path: "/comparison",
+          name: "comparison",
+          component: () => import("../pages/product/comparisonPage.vue"),
+        },
       ],
     },
   ],
