@@ -7,8 +7,8 @@
 </template>
 
 <script setup lang="ts">
-import TheNavbar from "../components/header/TheNavbar.vue";
-import TheFooter from "../components/footer/TheFooter.vue";
+  import TheNavbar from "../components/header/TheNavbar.vue";
+  import TheFooter from "../components/footer/TheFooter.vue";
 </script>
 
 <style scoped></style>
