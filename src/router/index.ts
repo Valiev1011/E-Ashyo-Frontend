@@ -14,16 +14,11 @@ const router = createRouter({
           component: () => import("../pages/home/homePage.vue"),
         },
         {
+<<<<<<<<< Temporary merge branch 1
           path: "/comparison",
           name: "comparison",
           component: () => import("../pages/product/comparisonPage.vue"),
-        },
-        {
-          path: "/ashyo",
-          name: "ashyo",
-          component: () => import("../pages/product/AboutAshyoPage.vue"),
-        },
-        {
+=========
           path: "/cart",
           name: "cart",
           component: () => import("../pages/cart/cartPage.vue"),
@@ -32,6 +27,7 @@ const router = createRouter({
           path: "/single_product",
           name: "single product",
           component: () => import("../components/ui/SingleProduct.vue"),
+>>>>>>>>> Temporary merge branch 2
         },
       ],
     },
