@@ -62,7 +62,7 @@
             {{ to_number(price) }}
           </h3>
           <h3 class="text-[24px] font-bold not-italic leading-[118%] pb-[2px]">
-            USZ
+            UZS
           </h3>
         </div>
 
@@ -78,6 +78,7 @@
         <div class="flex mt-[10px] gap-[14px] flex-row">
           <button
             class="border border-[#134E9B] w-[230px] h-[56px] rounded-[6px]"
+            @click="toStorage"
           >
             <p
               class="text-[16px] font-normal text-center not-italic leading-[130%] text-[#134E9B]"
@@ -196,84 +197,88 @@
       </div>
     </div>
   </div>
+  <div>
+    <ProductPage />
+  </div>
 </template>
 
 <script setup lang="ts">
-import {
-  mdiScaleUnbalanced,
-  mdiHeartOutline,
-  mdiTruckDeliveryOutline,
-  mdiStoreOutline,
-  mdiClockOutline,
-  mdiAccountOutline,
-} from "@mdi/js";
-//@ts-ignore
-import SvgIcon from "@jamescoyle/vue-icon";
+  import {
+    mdiScaleUnbalanced,
+    mdiHeartOutline,
+    mdiTruckDeliveryOutline,
+    mdiStoreOutline,
+    mdiClockOutline,
+    mdiAccountOutline,
+  } from "@mdi/js";
+  //@ts-ignore
+  import SvgIcon from "@jamescoyle/vue-icon";
 
-import { ref, reactive } from "vue";
+  import { ref, reactive } from "vue";
+  import ProductPage from "@/pages/product/productPage.vue";
 
-const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
-const price: any = ref("2470000");
-const isHovered = ref(false);
-const isActive = ref(false);
+  const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
+  const price = ref("2470000");
+  const isHovered = ref(false);
+  const isActive = ref(false);
 
-const images = reactive([
-  "http://localhost:5173/src/assets/single_phone.png",
-  "http://localhost:5173/src/assets/tv.png",
-  "http://localhost:5173/src/assets/single_phone.png",
-  "http://localhost:5173/src/assets/single_phone.png",
-]);
+  const images = reactive([
+    "http://localhost:5173/src/assets/single_phone.png",
+    "http://localhost:5173/src/assets/tv.png",
+    "http://localhost:5173/src/assets/single_phone.png",
+    "http://localhost:5173/src/assets/single_phone.png",
+  ]);
 
-const characteristic = reactive([{ name: "Brand", value: "Vivo" }]);
+  const characteristic = reactive([{ name: "Brand", value: "Vivo" }]);
 
-const zoomIn = (event: any) => {
-  isHovered.value = true;
-  const img = event.target;
-  const rect = img.getBoundingClientRect();
-  const x = ((event.clientX - rect.left) / rect.width) * 100;
-  const y = ((event.clientY - rect.top) / rect.height) * 100;
+  const zoomIn = (event: any) => {
+    isHovered.value = true;
+    const img = event.target;
+    const rect = img.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 100;
+    const y = ((event.clientY - rect.top) / rect.height) * 100;
 
-  img.style.transformOrigin = `${x}% ${y}%`;
-  img.style.transform = "scale(2.2)";
-};
+    img.style.transformOrigin = `${x}% ${y}%`;
+    img.style.transform = "scale(2.2)";
+  };
 
-const zoomOut = (event: any) => {
-  isHovered.value = false;
-  const img = event.target;
-  img.style.transform = "scale(1) translate(0, 0)";
-};
+  const zoomOut = (event: any) => {
+    isHovered.value = false;
+    const img = event.target;
+    img.style.transform = "scale(1) translate(0, 0)";
+  };
 
-const comments = reactive([
-  {
-    user: "Evgeniy Viktorovich",
-    comment:
-      "The most inconvenient application written with the left heel. Theinterface is awkward. Putting something up for sale is as difficultas possible. You need to go in the tab in the masonry in the hidden tabs in the buttons. Kick-ass",
-    rating: 3.9,
-  },
-]);
+  const comments = reactive([
+    {
+      user: "Evgeniy Viktorovich",
+      comment:
+        "The most inconvenient application written with the left heel. Theinterface is awkward. Putting something up for sale is as difficultas possible. You need to go in the tab in the masonry in the hidden tabs in the buttons. Kick-ass",
+      rating: 3.9,
+    },
+  ]);
 
-const main_image = ref(images[0]);
+  const main_image = ref(images[0]);
 
-const changeImage = (image: any) => {
-  main_image.value = image;
-};
+  const changeImage = (image: any) => {
+    main_image.value = image;
+  };
 
-const to_number = (number: string) => {
-  let count = 0;
-  let price: String[] = [];
+  const to_number = (number: string) => {
+    let count = 0;
+    let price: String[] = [];
 
-  for (let i = number.length - 1; i > -1; i--) {
-    if (count == 3) {
-      price.unshift(" ");
-      price.unshift(number[i]);
-      count = 0;
-    } else {
-      price.unshift(number[i]);
+    for (let i = number.length - 1; i > -1; i--) {
+      if (count == 3) {
+        price.unshift(" ");
+        price.unshift(number[i]);
+        count = 0;
+      } else {
+        price.unshift(number[i]);
+      }
+      count += 1;
     }
-    count += 1;
-  }
-  return price.join("");
-};
+    return price.join("");
+  };
 </script>
 
 <style scoped></style>

@@ -18,6 +18,21 @@ const router = createRouter({
           name: "comparison",
           component: () => import("../pages/product/comparisonPage.vue"),
         },
+        {
+          path: "/ashyo",
+          name: "ashyo",
+          component: () => import("../pages/product/AboutAshyoPage.vue"),
+        },
+        {
+          path: "/cart",
+          name: "cart",
+          component: () => import("../pages/cart/cartPage.vue"),
+        },
+        {
+          path: "/single_product",
+          name: "single product",
+          component: () => import("../components/ui/SingleProduct.vue"),
+        },
       ],
     },
   ],
