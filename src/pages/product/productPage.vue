@@ -37,7 +37,7 @@
     },
     // 1024 and up
     1024: {
-      itemsToShow: 5.5,
+      itemsToShow: 4.5,
       snapAlign: "center",
     },
   });

@@ -12,7 +12,7 @@ export default {
     },
     container: {
       center: true,
-      padding: "130px",
+      padding: "2%",
     },
   },
   plugins: [],
