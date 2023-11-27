@@ -124,6 +124,7 @@
               type="mdi"
               :path="mdiScaleUnbalanced"
               class="text-black cursor-pointer"
+              @click="gotoScaleUnbalanced"
             ></svg-icon>
           </div>
           <div class="bg-[#EBEFF3] p-3 rounded-md">
@@ -165,16 +166,21 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, reactive } from "vue";
-  import {
-    mdiChevronDown,
-    mdiScaleUnbalanced,
-    mdiHeartOutline,
-    mdiShoppingOutline,
-    mdiAccountOutline,
-  } from "@mdi/js";
-  //@ts-ignore
-  import SvgIcon from "@jamescoyle/vue-icon";
+
+import { ref, reactive } from "vue";
+import {
+  mdiChevronDown,
+  mdiScaleUnbalanced,
+  mdiHeartOutline,
+  mdiShoppingOutline,
+  mdiAccountOutline,
+} from "@mdi/js";
+//@ts-ignore
+import SvgIcon from "@jamescoyle/vue-icon";
+import { useRoute, useRouter } from 'vue-router';
+
+const route = useRoute();
+const router = useRouter();
 
   const value = ref();
   const options = [{ value: "smart", label: "smart" }];
@@ -198,57 +204,62 @@
   //   console.log("nmadur");
   // };
 
-  const isModalOpen = ref(false);
-  const categories = ref([
-    {
-      id: 1,
-      name: "Aksiyalar",
-      icon: "u_money-withdrawal",
-      bool: false,
-    },
-    {
-      id: 2,
-      name: "Smartfonlar",
-      icon: "bi_phone",
-      bool: false,
-    },
-    {
-      id: 3,
-      name: "Kiryuvish mashinalari",
-      icon: "Frame_48097311",
-      bool: false,
-    },
-    {
-      id: 4,
-      name: "Telivizorlar",
-      icon: "Frame_48097329",
-      bool: false,
-    },
-    {
-      id: 5,
-      name: "Kondetsionerlar",
-      icon: "iconoir_air-conditioner",
-      bool: false,
-    },
-    {
-      id: 6,
-      name: "Kompuyert va jihozlari",
-      icon: "bi_laptop",
-      bool: false,
-    },
-    {
-      id: 7,
-      name: "Muzlatgichlar",
-      icon: "arcticons_freezer",
-      bool: false,
-    },
-    {
-      id: 8,
-      name: "Chang yutgichlar",
-      icon: "iconoir_washing-machine",
-      bool: false,
-    },
-  ]);
+
+const gotoScaleUnbalanced = () => {
+  router.push('/comparison');
+}
+
+const isModalOpen = ref(false);
+const categories = ref([
+  {
+    id: 1,
+    name: "Aksiyalar",
+    icon: "u_money-withdrawal",
+    bool: false,
+  },
+  {
+    id: 2,
+    name: "Smartfonlar",
+    icon: "bi_phone",
+    bool: false,
+  },
+  {
+    id: 3,
+    name: "Kiryuvish mashinalari",
+    icon: "Frame_48097311",
+    bool: false,
+  },
+  {
+    id: 4,
+    name: "Telivizorlar",
+    icon: "Frame_48097329",
+    bool: false,
+  },
+  {
+    id: 5,
+    name: "Kondetsionerlar",
+    icon: "iconoir_air-conditioner",
+    bool: false,
+  },
+  {
+    id: 6,
+    name: "Kompuyert va jihozlari",
+    icon: "bi_laptop",
+    bool: false,
+  },
+  {
+    id: 7,
+    name: "Muzlatgichlar",
+    icon: "arcticons_freezer",
+    bool: false,
+  },
+  {
+    id: 8,
+    name: "Chang yutgichlar",
+    icon: "iconoir_washing-machine",
+    bool: false,
+  },
+]);
 
   const attributes = ref([
     { id: 1, name: "Oppo smartfonlar" },

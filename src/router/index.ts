@@ -14,6 +14,11 @@ const router = createRouter({
           component: () => import("../pages/home/homePage.vue"),
         },
         {
+
+          path: "/comparison",
+          name: "comparison",
+          component: () => import("../pages/product/comparisonPage.vue"),
+
           path: "/cart",
           name: "cart",
           component: () => import("../pages/cart/cartPage.vue"),
@@ -22,6 +27,7 @@ const router = createRouter({
           path: "/single_product",
           name: "single product",
           component: () => import("../components/ui/SingleProduct.vue"),
+
         },
       ],
     },
