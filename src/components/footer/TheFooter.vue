@@ -50,8 +50,8 @@
         </p>
       </div>
       <div class="flex-col">
-        <h1 class="font-bold mb-4">Menyu</h1>
-        <h1>Ashyo haqida</h1>
+        <h1 class="font-bold">Menyu</h1>
+          <router-link to="/ashyo">About us</router-link>
         <h1>Foydalanish shartlari</h1>
         <h1>Maxfiylik va hafsizlik siyosati</h1>
         <h1>Mahsulotlarni va tovarlarni qaytarish siyosati</h1>
