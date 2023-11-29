@@ -2,7 +2,7 @@
   <div class="ml-[130px] mt-[30px]">
     <div>
       <h2 class="text-[32px] font-bold not-italic leading-[130%]">
-        {{ name }}
+        {{ product?.name }}
       </h2>
     </div>
     <!-- Product rasmi -->
@@ -59,7 +59,7 @@
             >Narxi:</span
           >
           <h3 class="text-[32px] font-bold not-italic leading-[120%]">
-            {{ to_number(price.toString()) }}
+            {{ product?.price }}
           </h3>
           <h3 class="text-[24px] font-bold not-italic leading-[118%] pb-[2px]">
             UZS
@@ -140,13 +140,9 @@
         class="flex mt-[70px] w-[651px] mb-[20px] flex-col overflow-auto max-h-[500px] no-scrollbar"
         v-if="!isActive"
       >
-        <div
-          class="flex flex-wrap"
-          v-for="(item, index) in characteristic"
-          :key="index"
-        >
-          <h2 class="w-[378px]">{{ item.name }}</h2>
-          <h2>{{ item.value }}</h2>
+        <div class="flex flex-wrap">
+          <h2 class="w-[378px]">Brand</h2>
+          <h2>{{ product?.brand?.brand_name }}</h2>
           <div
             class="w-[651px] my-[13px] border-dashed border-b-[2px] border-[#B6BABF]"
           ></div>
@@ -213,13 +209,34 @@ import {
 } from "@mdi/js";
 //@ts-ignore
 import SvgIcon from "@jamescoyle/vue-icon";
+import { useAdminProductStore } from "../../store/products";
 
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted } from "vue";
+import { useRoute, type LocationQueryValue } from "vue-router";
+
 
   const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
   const price = ref(2470000);
   const isHovered = ref(false);
   const isActive = ref(false);
+
+const store = useAdminProductStore();
+const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
+const price = ref("2470000");
+const isHovered = ref(false);
+const isActive = ref(false);
+const product = ref();
+
+const route = useRoute();
+const id = ref<number | undefined>();
+
+id.value = Number(route.query.id?.toString());
+console.log(id.value);
+
+onMounted(async () => {
+  product.value = await store.findOne(id.value);
+});
+
 
 const images = reactive([
   "http://localhost:5173/src/assets/single_phone.png",
