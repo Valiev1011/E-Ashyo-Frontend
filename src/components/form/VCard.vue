@@ -6,7 +6,10 @@
       class="bg-[#EBEFF3] w-[250px] flex items-center justify-center flex-col p-5 rounded-[8px]"
     >
       <div class="flex bg-gray gap-[120px] w-[300px] px-10">
-        <p v-if="props.item.sale" class="bg-[#FFF] text-[#E81504] rounded p-1">
+        <p
+          v-if="props?.item?.sale_price"
+          class="bg-[#FFF] text-[#E81504] rounded p-1"
+        >
           Aksiyada
         </p>
         <p v-else class="p-[15px] w-[100px]"></p>
@@ -17,22 +20,28 @@
           <SvgIcon type="mdi" :path="mdiCardsHeart" class="text-[red]" />
         </button>
       </div>
+
       <img
-        :src="props.item.image"
+        :src="
+          props?.item?.productMedia[1]
+            ? `http://localhost:3000/api/media/${props?.item?.productMedia[1]?.url}`
+            : `http://localhost:3000/api/media/${props?.item?.productMedia[0]?.url}`
+        "
         alt="img"
         class="h-[150px] w-[150px] object-cover"
       />
     </div>
     <div class="card-header flex flex-col gap-3">
-      <p class="text-left">{{ props.item.title }}</p>
-      <h1 class="text-[20px] text-left">{{ props.item.price }}</h1>
-      <!-- <pre>{{ props }}</pre> -->
+      <p class="text-left text-[#545D6A]">{{ props?.item?.name }}</p>
+      <h1 class="text-[20px] text-left font-medium">
+        {{ props?.item?.price }} uzs
+      </h1>
     </div>
-    <div class="flex gap-3">
+    <div class="w-full flex gap-3">
       <p
-        class="text-[#F02C96] bg-[#F02C961A] text-left flex items-center justify-center rounded"
+        class="text-[#F02C96] bg-[#F02C961A] flex justify-center items-start rounded"
       >
-        {{ props.item.lifetime }}
+        6 oy / {{ Math.round(props?.item?.price / 6) }} uzs
       </p>
       <button
         class="w-[42px] h-[34px] rounded border text-center flex items-center justify-center"
@@ -52,21 +61,21 @@ import { defineProps, ref } from "vue";
 import shop_bag from "../../assets/shopping-bag.vue";
 import tarozi from "../../assets/la_balance-scale-right.vue";
 import heart from "../../assets/heart.vue";
-// @ts-ignore
-import SvgIcon from "@jamescoyle/vue-icon";
-import { mdiHeartOutline, mdiCardsHeart } from "@mdi/js";
-let like = ref(false);
 
-const props = defineProps({
+export interface IProps {
   item: {
-    type: Object,
-    default: () => ({
-      title: "",
-      image: "",
-      price: "",
-      lifetime: "",
-    }),
-  },
-});
+    name: string;
+    price: number;
+    sale_price: number;
+    average_rating: number;
+    productMedia: [{ url: string }];
+  };
+}
+import { mdiHeartOutline, mdiCardsHeart } from "@mdi/js";
+//@ts-ignore
+import SvgIcon from "@jamescoyle/vue-icon";
+const like = ref(false);
+const props = defineProps<IProps>();
+// console.log(props.item.productMedia.url);
 </script>
 <style scoped></style>
