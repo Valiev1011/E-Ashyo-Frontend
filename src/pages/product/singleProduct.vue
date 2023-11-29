@@ -117,7 +117,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col container mt-[80px] mb-[50px]">
+    <div class="flex flex-col mt-[80px] mb-[50px]">
       <div class="flex flex-row gap-[85px] mb-[20px]">
         <h2
           class="cursor-pointer text-[18px] leading-[129%] not-italic"
@@ -137,7 +137,7 @@
 
       <!-- Texnik xususiyatlar -->
       <div
-        class="flex container mt-[70px] w-[651px] mb-[20px] flex-col overflow-auto max-h-[500px] no-scrollbar"
+        class="flex mt-[70px] w-[651px] mb-[20px] flex-col overflow-auto max-h-[500px] no-scrollbar"
         v-if="!isActive"
       >
         <div
@@ -156,7 +156,7 @@
       <!-- Mijozlar fikri -->
       <div class="overflow-auto max-h-[500px] no-scrollbar" v-else>
         <div
-          class="container mt-[60px] w-[651px] mb-[20px] flex gap-[14px]"
+          class="mt-[60px] w-[651px] mb-[20px] flex gap-[14px]"
           v-for="(item, index) in comments"
           :key="index"
         >
