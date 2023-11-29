@@ -24,15 +24,20 @@
       <img
         :src="
           props?.item?.productMedia[1]
-            ? `http://localhost:3000/api/media/${props?.item?.productMedia[1]?.url}`
-            : `http://localhost:3000/api/media/${props?.item?.productMedia[0]?.url}`
+            ? `${props?.item?.productMedia[1]?.url}`
+            : `${props?.item?.productMedia[0]?.url}`
         "
         alt="img"
-        class="h-[150px] w-[150px] object-cover"
+        class="h-[170px] w-[200px] object-contain"
       />
     </div>
     <div class="card-header flex flex-col gap-3">
-      <p class="text-left text-[#545D6A]">{{ props?.item?.name }}</p>
+      <p
+        class="text-left text-[#545D6A] hover:cursor-pointer hover:text-[black] hover:underline"
+        @click="toSinglePage(props.item.id)"
+      >
+        {{ props?.item?.name }}
+      </p>
       <h1 class="text-[20px] text-left font-medium">
         {{ props?.item?.price }} uzs
       </h1>
@@ -61,9 +66,11 @@ import { defineProps, ref } from "vue";
 import shop_bag from "../../assets/shopping-bag.vue";
 import tarozi from "../../assets/la_balance-scale-right.vue";
 import heart from "../../assets/heart.vue";
+import { useRouter } from "vue-router";
 
 export interface IProps {
   item: {
+    id: number;
     name: string;
     price: number;
     sale_price: number;
@@ -75,7 +82,11 @@ import { mdiHeartOutline, mdiCardsHeart } from "@mdi/js";
 //@ts-ignore
 import SvgIcon from "@jamescoyle/vue-icon";
 const like = ref(false);
+const router = useRouter();
 const props = defineProps<IProps>();
 // console.log(props.item.productMedia.url);
+const toSinglePage = (id: number) => {
+  router.push({ name: "singleProduct", query: { id } });
+};
 </script>
 <style scoped></style>

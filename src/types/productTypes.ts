@@ -1,4 +1,5 @@
 export interface IProduct {
+  id: number;
   name: string;
   price: number;
   sale_price: number;
@@ -6,8 +7,12 @@ export interface IProduct {
   productMedia: {
     url: string;
   };
+  brand: {
+    brand_name: string;
+  };
 }
 export interface IProductSale {
+  id: number;
   nmae: string;
   price: number;
   sale_price: number;

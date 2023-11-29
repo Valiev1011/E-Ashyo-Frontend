@@ -30,13 +30,8 @@ const router = createRouter({
         },
         {
           path: "/single_product",
-
           name: "singleProduct",
           component: () => import("../pages/product/singleProduct.vue"),
-
-
-
-
         },
       ],
     },
