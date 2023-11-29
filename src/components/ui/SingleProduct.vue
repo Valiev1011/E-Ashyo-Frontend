@@ -59,7 +59,7 @@
             >Narxi:</span
           >
           <h3 class="text-[32px] font-bold not-italic leading-[120%]">
-            {{ to_number(price) }}
+            {{ to_number(price.toString()) }}
           </h3>
           <h3 class="text-[24px] font-bold not-italic leading-[118%] pb-[2px]">
             UZS
@@ -118,7 +118,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col container mt-[80px] mb-[50px]">
+    <div class="flex flex-col mt-[80px] mb-[50px]">
       <div class="flex flex-row gap-[85px] mb-[20px]">
         <h2
           class="cursor-pointer text-[18px] leading-[129%] not-italic"
@@ -138,7 +138,7 @@
 
       <!-- Texnik xususiyatlar -->
       <div
-        class="flex container mt-[70px] w-[651px] mb-[20px] flex-col overflow-auto max-h-[500px] no-scrollbar"
+        class="flex mt-[70px] w-[651px] mb-[20px] flex-col overflow-auto max-h-[500px] no-scrollbar"
         v-if="!isActive"
       >
         <div
@@ -157,7 +157,7 @@
       <!-- Mijozlar fikri -->
       <div class="overflow-auto max-h-[500px] no-scrollbar" v-else>
         <div
-          class="container mt-[60px] w-[651px] mb-[20px] flex gap-[14px]"
+          class="mt-[60px] w-[651px] mb-[20px] flex gap-[14px]"
           v-for="(item, index) in comments"
           :key="index"
         >
@@ -218,7 +218,7 @@
   import ProductPage from "@/pages/product/productPage.vue";
 
   const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
-  const price = ref("2470000");
+  const price = ref(2470000);
   const isHovered = ref(false);
   const isActive = ref(false);
 
@@ -241,6 +241,8 @@
     img.style.transformOrigin = `${x}% ${y}%`;
     img.style.transform = "scale(2.2)";
   };
+
+  const toStorage = () => {};
 
   const zoomOut = (event: any) => {
     isHovered.value = false;
