@@ -4,15 +4,10 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "130px",
     },
     extend: {},
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
-    },
-    container: {
-      center: true,
-      padding: "2%",
     },
   },
   plugins: [],
