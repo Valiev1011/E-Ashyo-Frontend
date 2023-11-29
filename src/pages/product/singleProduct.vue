@@ -214,12 +214,6 @@ import { useAdminProductStore } from "../../store/products";
 import { ref, reactive, onMounted } from "vue";
 import { useRoute, type LocationQueryValue } from "vue-router";
 
-
-  const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
-  const price = ref(2470000);
-  const isHovered = ref(false);
-  const isActive = ref(false);
-
 const store = useAdminProductStore();
 const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
 const price = ref("2470000");
@@ -236,7 +230,6 @@ console.log(id.value);
 onMounted(async () => {
   product.value = await store.findOne(id.value);
 });
-
 
 const images = reactive([
   "http://localhost:5173/src/assets/single_phone.png",
@@ -258,13 +251,13 @@ const zoomIn = (event: any) => {
   img.style.transform = "scale(2.2)";
 };
 
-  const toStorage = () => {};
+const toStorage = () => {};
 
-  const zoomOut = (event: any) => {
-    isHovered.value = false;
-    const img = event.target;
-    img.style.transform = "scale(1) translate(0, 0)";
-  };
+const zoomOut = (event: any) => {
+  isHovered.value = false;
+  const img = event.target;
+  img.style.transform = "scale(1) translate(0, 0)";
+};
 
 const comments = reactive([
   {
