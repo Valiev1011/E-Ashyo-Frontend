@@ -8,7 +8,6 @@
       :pause-autoplay-on-hover="true"
       v-bind="settings"
       :breakpoints="breakpoints"
-      :wrap-around="true"
     >
       <Slide v-for="(item, index) in products" :key="index">
         <VCard v-if="item" :item="item" />
@@ -47,7 +46,7 @@ const breakpoints = ref({
   },
   // 1024 and up
   1024: {
-    itemsToShow: 4.5,
+    itemsToShow: 5.0,
     snapAlign: "center",
   },
 });
