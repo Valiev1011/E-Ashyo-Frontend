@@ -15,8 +15,8 @@ export const useAdminProductStore = defineStore("admin-product", {
       try {
         this.loading = true;
         const res = await productApi.lastViewedProducts();
-        this.lastProducts = res.data;
-        return res?.config;
+        // this.lastProducts = res.data;
+        return res;
       } catch (error) {
         this.error = error?.response?.data;
         console.log(error);
@@ -46,6 +46,20 @@ export const useAdminProductStore = defineStore("admin-product", {
         // this.popularProducts = res.;
         console.log(res);
         return res.filter((val) => val != null);
+      } catch (error) {
+        this.error = error?.response?.data;
+        console.log(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    async findOne(id: number | undefined) {
+      try {
+        this.loading = true;
+        const res = await productApi.findOne(id);
+        // this.popularProducts = res.;
+        console.log(res);
+        return res;
       } catch (error) {
         this.error = error?.response?.data;
         console.log(error);
