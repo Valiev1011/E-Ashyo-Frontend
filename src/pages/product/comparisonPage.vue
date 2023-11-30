@@ -1,10 +1,7 @@
 <template>
   <div class="m-10">
-
     <div class="flex gap-4 m-10">
-      <div v-for="(item, index) in items" :key="index">
-        <VCard :item="item" />
-      </div>
+      <div v-for="(item, index) in items" :key="index"></div>
     </div>
     <h1 class="text-[25px] font-bold m-10">Telefon xususiyatlar</h1>
     <div class="flex gap-10">
@@ -43,7 +40,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup lang="ts">

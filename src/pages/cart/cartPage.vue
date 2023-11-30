@@ -1,14 +1,18 @@
 <template>
-  <div class="w-full mt-[80px] mx-auto container px-20">
-    <h1 class="text-[32px] font-bold leading-[130%] not-italic text-[#06172D]">
-      Savat
-    </h1>
-    <div
-      class="flex mt-[36px] gap-[30px] flex-col"
-      v-for="(item, index) in products"
-      :key="index + Math.random()"
-    >
-      <Cart :item="item" :delete="deleteCartItem" />
+  <div class="w-full mt-[80px] mx-auto container">
+    <div class="pl-20">
+      <h1
+        class="text-[32px] font-bold leading-[130%] not-italic text-[#06172D]"
+      >
+        Savat
+      </h1>
+      <div
+        class="flex mt-[36px] gap-[30px] flex-col"
+        v-for="(item, index) in products"
+        :key="index + Math.random()"
+      >
+        <Cart :item="item" :delete="deleteCartItem" />
+      </div>
     </div>
   </div>
 </template>

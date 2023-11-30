@@ -2,7 +2,7 @@
   <div class="ml-[130px] mt-[30px]">
     <div>
       <h2 class="text-[32px] font-bold not-italic leading-[130%]">
-        {{ name }}
+        {{ product?.name }}
       </h2>
     </div>
     <!-- Product rasmi -->
@@ -59,7 +59,7 @@
             >Narxi:</span
           >
           <h3 class="text-[32px] font-bold not-italic leading-[120%]">
-            {{ to_number(price) }}
+            {{ product?.price }}
           </h3>
           <h3 class="text-[24px] font-bold not-italic leading-[118%] pb-[2px]">
             UZS
@@ -70,7 +70,7 @@
           <p
             class="text-[16px] text-[#545D6A] font-normal not-italic leading-[130%] text-center"
           >
-            Oyiga {{ to_number(Math.round((price * 1) / 12).toString()) }} usz
+            <!-- Oyiga {{ to_number(Math.round((price * 1) / 12).toString()) }} usz -->
             dan muddatli to’lov
           </p>
         </button>
@@ -78,7 +78,6 @@
         <div class="flex mt-[10px] gap-[14px] flex-row">
           <button
             class="border border-[#134E9B] w-[230px] h-[56px] rounded-[6px]"
-            @click="toStorage"
           >
             <p
               class="text-[16px] font-normal text-center not-italic leading-[130%] text-[#134E9B]"
@@ -118,7 +117,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col container mt-[80px] mb-[50px]">
+    <div class="flex flex-col mt-[80px] mb-[50px]">
       <div class="flex flex-row gap-[85px] mb-[20px]">
         <h2
           class="cursor-pointer text-[18px] leading-[129%] not-italic"
@@ -138,16 +137,12 @@
 
       <!-- Texnik xususiyatlar -->
       <div
-        class="flex container mt-[70px] w-[651px] mb-[20px] flex-col overflow-auto max-h-[500px] no-scrollbar"
+        class="flex mt-[70px] w-[651px] mb-[20px] flex-col overflow-auto max-h-[500px] no-scrollbar"
         v-if="!isActive"
       >
-        <div
-          class="flex flex-wrap"
-          v-for="(item, index) in characteristic"
-          :key="index"
-        >
-          <h2 class="w-[378px]">{{ item.name }}</h2>
-          <h2>{{ item.value }}</h2>
+        <div class="flex flex-wrap">
+          <h2 class="w-[378px]">Brand</h2>
+          <h2>{{ product?.brand?.brand_name }}</h2>
           <div
             class="w-[651px] my-[13px] border-dashed border-b-[2px] border-[#B6BABF]"
           ></div>
@@ -157,7 +152,7 @@
       <!-- Mijozlar fikri -->
       <div class="overflow-auto max-h-[500px] no-scrollbar" v-else>
         <div
-          class="container mt-[60px] w-[651px] mb-[20px] flex gap-[14px]"
+          class="mt-[60px] w-[651px] mb-[20px] flex gap-[14px]"
           v-for="(item, index) in comments"
           :key="index"
         >
@@ -203,82 +198,98 @@
 </template>
 
 <script setup lang="ts">
-  import {
-    mdiScaleUnbalanced,
-    mdiHeartOutline,
-    mdiTruckDeliveryOutline,
-    mdiStoreOutline,
-    mdiClockOutline,
-    mdiAccountOutline,
-  } from "@mdi/js";
-  //@ts-ignore
-  import SvgIcon from "@jamescoyle/vue-icon";
+import ProductPage from "../product/popularProductPage.vue";
+import {
+  mdiScaleUnbalanced,
+  mdiHeartOutline,
+  mdiTruckDeliveryOutline,
+  mdiStoreOutline,
+  mdiClockOutline,
+  mdiAccountOutline,
+} from "@mdi/js";
+//@ts-ignore
+import SvgIcon from "@jamescoyle/vue-icon";
+import { useAdminProductStore } from "../../store/products";
 
-  import { ref, reactive } from "vue";
-  import ProductPage from "@/pages/product/productPage.vue";
+import { ref, reactive, onMounted } from "vue";
+import { useRoute, type LocationQueryValue } from "vue-router";
 
-  const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
-  const price = ref("2470000");
-  const isHovered = ref(false);
-  const isActive = ref(false);
+const store = useAdminProductStore();
+const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
+const price = ref("2470000");
+const isHovered = ref(false);
+const isActive = ref(false);
+const product = ref();
 
-  const images = reactive([
-    "http://localhost:5173/src/assets/single_phone.png",
-    "http://localhost:5173/src/assets/tv.png",
-    "http://localhost:5173/src/assets/single_phone.png",
-    "http://localhost:5173/src/assets/single_phone.png",
-  ]);
+const route = useRoute();
+const id = ref<number | undefined>();
 
-  const characteristic = reactive([{ name: "Brand", value: "Vivo" }]);
+id.value = Number(route.query.id?.toString());
+console.log(id.value);
 
-  const zoomIn = (event: any) => {
-    isHovered.value = true;
-    const img = event.target;
-    const rect = img.getBoundingClientRect();
-    const x = ((event.clientX - rect.left) / rect.width) * 100;
-    const y = ((event.clientY - rect.top) / rect.height) * 100;
+onMounted(async () => {
+  product.value = await store.findOne(id.value);
+});
 
-    img.style.transformOrigin = `${x}% ${y}%`;
-    img.style.transform = "scale(2.2)";
-  };
+const images = reactive([
+  "http://localhost:5173/src/assets/single_phone.png",
+  "http://localhost:5173/src/assets/tv.png",
+  "http://localhost:5173/src/assets/single_phone.png",
+  "http://localhost:5173/src/assets/single_phone.png",
+]);
 
-  const zoomOut = (event: any) => {
-    isHovered.value = false;
-    const img = event.target;
-    img.style.transform = "scale(1) translate(0, 0)";
-  };
+const characteristic = reactive([{ name: "Brand", value: "Vivo" }]);
 
-  const comments = reactive([
-    {
-      user: "Evgeniy Viktorovich",
-      comment:
-        "The most inconvenient application written with the left heel. Theinterface is awkward. Putting something up for sale is as difficultas possible. You need to go in the tab in the masonry in the hidden tabs in the buttons. Kick-ass",
-      rating: 3.9,
-    },
-  ]);
+const zoomIn = (event: any) => {
+  isHovered.value = true;
+  const img = event.target;
+  const rect = img.getBoundingClientRect();
+  const x = ((event.clientX - rect.left) / rect.width) * 100;
+  const y = ((event.clientY - rect.top) / rect.height) * 100;
 
-  const main_image = ref(images[0]);
+  img.style.transformOrigin = `${x}% ${y}%`;
+  img.style.transform = "scale(2.2)";
+};
 
-  const changeImage = (image: any) => {
-    main_image.value = image;
-  };
+const toStorage = () => {};
 
-  const to_number = (number: string) => {
-    let count = 0;
-    let price: String[] = [];
+const zoomOut = (event: any) => {
+  isHovered.value = false;
+  const img = event.target;
+  img.style.transform = "scale(1) translate(0, 0)";
+};
 
-    for (let i = number.length - 1; i > -1; i--) {
-      if (count == 3) {
-        price.unshift(" ");
-        price.unshift(number[i]);
-        count = 0;
-      } else {
-        price.unshift(number[i]);
-      }
-      count += 1;
+const comments = reactive([
+  {
+    user: "Evgeniy Viktorovich",
+    comment:
+      "The most inconvenient application written with the left heel. Theinterface is awkward. Putting something up for sale is as difficultas possible. You need to go in the tab in the masonry in the hidden tabs in the buttons. Kick-ass",
+    rating: 3.9,
+  },
+]);
+
+const main_image = ref(images[0]);
+
+const changeImage = (image: any) => {
+  main_image.value = image;
+};
+
+const to_number = (number: string) => {
+  let count = 0;
+  let price: String[] = [];
+
+  for (let i = number.length - 1; i > -1; i--) {
+    if (count == 3) {
+      price.unshift(" ");
+      price.unshift(number[i]);
+      count = 0;
+    } else {
+      price.unshift(number[i]);
     }
-    return price.join("");
-  };
+    count += 1;
+  }
+  return price.join("");
+};
 </script>
 
 <style scoped></style>

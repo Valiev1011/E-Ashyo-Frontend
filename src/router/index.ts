@@ -30,8 +30,8 @@ const router = createRouter({
         },
         {
           path: "/single_product",
-          name: "single product",
-          component: () => import("../components/ui/SingleProduct.vue"),
+          name: "singleProduct",
+          component: () => import("../pages/product/singleProduct.vue"),
         },
       ],
     },
