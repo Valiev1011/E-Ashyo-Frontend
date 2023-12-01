@@ -51,13 +51,11 @@
         </h1>
       </div>
       <div class="w-3/6 flex items-center gap-3 mr-6">
-        <div
-          class="items-center justify-center bg-[#134E9B] rounded-md px-3 py-3"
-        >
+        <div class="items-center justify-center cursor-pointer">
           <button
             @click="toggleModal"
             :class="{ 'open-modal': isModalOpen }"
-            class="flex text-white"
+            class="flex text-white cursor-pointer bg-[#134E9B] px-3 py-3 rounded-md"
           >
             <span v-if="isModalOpen" class="flex">Kategoriya </span>
 
@@ -73,7 +71,7 @@
           </button>
 
           <div v-if="isModalOpen" class="categories-list w-5/6 mx-auto flex">
-            <div class="w-2/5 bg-[#EBEFF3] px-8 py-10">
+            <div class="w-2/5 px-8 py-10">
               <!-- <h2>Categories</h2> -->
               <ul class="flex flex-col gap-8">
                 <li
@@ -193,19 +191,6 @@ const clicked = () => {
   console.log(open.value);
 };
 
-// const rotate = (e: any) => {
-//   open.value = !open.value;
-//   if (open.value) {
-//     console.log((e.target.style.rotate = "180deg"));
-//   } else {
-//     console.log((e.target.style.rotate = "0deg"));
-//   }
-// };
-
-// const logout = () => {
-//   console.log("nmadur");
-// };
-
 const gotoScaleUnbalanced = () => {
   router.push("/comparison");
 };
@@ -279,6 +264,7 @@ const attributes = ref([
 
 const toggleModal = () => {
   isModalOpen.value = !isModalOpen.value;
+  
 };
 
 const closeModal = () => {
@@ -303,14 +289,14 @@ const closeModal = () => {
 }
 
 .open-modal {
-  border-radius: 50%;
+  /* border-radius: 50%; */
   /* background-color: #ff9900; */
   color: #fff;
 }
 
 .categories-list {
   position: absolute;
-  top: 100px;
+  top: 120px;
   left: 100px;
   /* width: 100%; */
   /* right: 180px; */
