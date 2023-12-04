@@ -18,22 +18,27 @@
 </template>
 
 <script setup lang="ts">
-  import Cart from "@/components/form/Cart.vue";
-  import { cartStore } from "@/store/cart.js";
-  import { ref, onMounted } from "vue";
-  const store = cartStore();
+import Cart from "@/components/form/Cart.vue";
+import { cartStore } from "@/store/cart.js";
+import { ref, onMounted } from "vue";
+//@ts-ignore
 
-  const products = ref();
+const store = cartStore();
 
-  const deleteCartItem = (id: any) => {
-    store.deleteCartItem(id);
-    products.value = store.items;
-  };
+const products = ref();
 
-  onMounted(() => {
-    store.getCart();
-    products.value = store.items;
-  });
+const deleteCartItem = async (id: any) => {
+  await store.deleteCartItem(id);
+  products.value = store?.items;
+};
+
+onMounted(async () => {
+  // store.getCart();
+  await store.getCart();
+
+  products.value = store?.items;
+  localStorage.setItem("products", JSON.stringify(store?.items));
+});
 </script>
 
 <style scoped></style>

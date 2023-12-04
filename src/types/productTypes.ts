@@ -4,9 +4,11 @@ export interface IProduct {
   price: number;
   sale_price: number;
   average_rating: number;
-  productMedia: {
-    url: string;
-  };
+  productMedia: [
+    {
+      url: string;
+    }
+  ];
   brand: {
     brand_name: string;
   };
