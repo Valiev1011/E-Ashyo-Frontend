@@ -56,6 +56,17 @@ const router = createRouter({
       ],
     },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    // If the route has a hash, scroll to the element with that id
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: "auto",
+      };
+    }
+    // Otherwise, scroll to the top of the page
+    return { top: 0, behavior: "auto" };
+  },
 });
 
 export default router;

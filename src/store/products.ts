@@ -12,6 +12,7 @@ export const useAdminProductStore = defineStore("admin-product", {
     popularProducts: null,
     liked: [],
     products: [] as IProduct[],
+    searched: [] as IProduct[],
   }),
   actions: {
     async lastViewedProducts() {
@@ -90,6 +91,21 @@ export const useAdminProductStore = defineStore("admin-product", {
           | IProduct[]
           | any;
         this.products = products;
+        return products;
+      } catch (error) {
+        this.error = error?.response?.data;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async productSearch(payload: object) {
+      try {
+        this.loading = true;
+        const products = (await productApi.productSearch(payload)) as
+          | IProduct[]
+          | any;
+        this.searched = products;
         return products;
       } catch (error) {
         this.error = error?.response?.data;
