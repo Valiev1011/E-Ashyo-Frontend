@@ -30,4 +30,10 @@ export const productApi = {
     console.log(id);
     return axiosClient.post(url, id);
   },
+
+  productSearch(payload: object) {
+    const url = `product/search`;
+    // console.log(payload);
+    return axiosClient.post(url, payload);
+  },
 };

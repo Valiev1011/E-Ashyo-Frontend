@@ -41,11 +41,11 @@
       </div>
     </div>
     <div class="w-full mb-6 mt-6 flex gap-14 pl-16">
-      <div class="w-1/6 flex relative items-center">
+      <div class="w-1/6 flex relative items-center cursor-pointer" @click="gotohome">
         <img src="../../components/icons/Group 48097269.svg" alt="group img" />
         <h1
           class="font-sans text-[36px] text-[#134E9B] font-black absolute left-14"
-          @click="gotohome"
+          
         >
           Ashyo
         </h1>
@@ -129,10 +129,13 @@
               type="text"
               class="border rounded-l-md bg-[#EBEFF3] pr-56 pl-10 pt-3 pb-3 outline-none"
               placeholder="What are you looking for?"
+              v-model="inputValue"
             />
           </form>
           <button
             class="items-center justify-center bg-[#134E9B] w-16 px-6 py-2 rounded-r-md"
+            @click="findProducts(inputValue)"
+
           >
             <img src="../../components/icons/u_search.svg" alt="img search" />
           </button>
@@ -189,7 +192,7 @@
       <ol class="flex" v-for="item in value" :key="item.id">
         <li
           v-if="item.parent_category_id === null"
-          class="text-[#545D6A] hover:underline hover:text-black"
+          class="text-[#545D6A] hover:underline hover:text-black cursor-pointer"
         >
           {{ item.category_name }}
         </li>
@@ -328,6 +331,7 @@ import VButton from "../form/VButton.vue"
 import {danger,warning,success} from "../../plugins/Notification.ts"
 //@ts-ignore
 import VInput from "../form/VInput.vue";
+import { storeToRefs } from "pinia";
 
  
 const route = useRoute();
@@ -343,6 +347,7 @@ const options = [{ value: "smart", label: "smart" }];
 const open = ref(false);
 const modal = ref(false);
 const forConfirm = ref()
+const inputValue = ref()
 
 const schema = computed(() => {
   return {
@@ -407,6 +412,13 @@ onMounted(async () => {
 
   localStorage.setItem("products",JSON.stringify(cart_store.items))
 });
+
+const findProducts=async(input:any)=>{
+  await productStore.productSearch({search_input:input})
+  if(productStore.searched.length){
+    router.push({path:'/product'})
+  }
+}
 
 const hoveredCategory = ref();
 
