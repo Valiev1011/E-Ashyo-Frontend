@@ -29,6 +29,16 @@ const router = createRouter({
           component: () => import("../pages/product/AboutAshyoPage.vue"),
         },
         {
+          path: "/product",
+          name: "product",
+          component: () => import("../pages/product/ProductsPage.vue"),
+        },
+        {
+          path: "/product-brand",
+          name: "product_brand",
+          component: () => import("../pages/product/ProductsBrandPage.vue"),
+        },
+        {
           path: "/single_product",
           name: "singleProduct",
           component: () => import("../pages/product/singleProduct.vue"),
