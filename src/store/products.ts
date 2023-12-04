@@ -7,8 +7,12 @@ export const useAdminProductStore = defineStore("admin-product", {
     loading: false,
     error: "",
     status: null,
+    press: false,
     saleProducts: null,
     popularProducts: null,
+    liked: [],
+    products: [] as IProduct[],
+    searched: [] as IProduct[],
   }),
   actions: {
     async lastViewedProducts() {
@@ -63,6 +67,48 @@ export const useAdminProductStore = defineStore("admin-product", {
       } catch (error) {
         this.error = error?.response?.data;
         console.log(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+    addToLikedProducts(id: number | undefined) {
+      this.liked.push({ id: id, like: true });
+      console.log("add ishladi");
+      localStorage.setItem("likedProducts", JSON.stringify(this.liked));
+    },
+
+    removeFromLikedProducts(id: number | undefined) {
+      this.liked = this.liked.filter((productId) => productId.id !== id);
+      this.products = this.products.filter((product) => product.id !== id);
+      console.log("remove ishladi");
+      localStorage.setItem("likedProducts", JSON.stringify(this.liked));
+    },
+
+    async findProductOnStorage(id: Array<number>) {
+      try {
+        this.loading = true;
+        const products = (await productApi.findProductOnStorage(id)) as
+          | IProduct[]
+          | any;
+        this.products = products;
+        return products;
+      } catch (error) {
+        this.error = error?.response?.data;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async productSearch(payload: object) {
+      try {
+        this.loading = true;
+        const products = (await productApi.productSearch(payload)) as
+          | IProduct[]
+          | any;
+        this.searched = products;
+        return products;
+      } catch (error) {
+        this.error = error?.response?.data;
       } finally {
         this.loading = false;
       }
