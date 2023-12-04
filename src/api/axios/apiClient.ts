@@ -7,7 +7,9 @@ const axiosClient = axios.create({
 axiosClient.interceptors.request.use(
   (config) => {
     let token = localStorage.getItem("token");
+
     config.withCredentials = true;
+    let cookie = decodeURIComponent(document.cookie);
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

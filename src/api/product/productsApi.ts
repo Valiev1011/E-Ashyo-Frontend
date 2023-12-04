@@ -24,4 +24,10 @@ export const productApi = {
     const url = `product/get/${id}`;
     return axiosClient.get(url);
   },
+
+  findProductOnStorage(id: Array<number>) {
+    const url = `product/find`;
+    console.log(id);
+    return axiosClient.post(url, id);
+  },
 };

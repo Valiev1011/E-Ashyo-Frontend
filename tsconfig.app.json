@@ -17,6 +17,7 @@
   },
   "files": [
     "src/pages/product/comparisonPage.vue",
-    "src/pages/product/singleProduct.vue"
+    "src/pages/product/singleProduct.vue",
+    "src/pages/product/likeProducts.vue"
   ]
 }
