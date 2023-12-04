@@ -33,6 +33,16 @@ const router = createRouter({
           name: "singleProduct",
           component: () => import("../pages/product/singleProduct.vue"),
         },
+        {
+          path: "/like_page",
+          name: "likedPage",
+          component: () => import("../pages/product/likeProducts.vue"),
+        },
+        {
+          path: "/user_page",
+          name: "userPage",
+          component: () => import("../components/ui/Modal.vue"),
+        },
       ],
     },
   ],
