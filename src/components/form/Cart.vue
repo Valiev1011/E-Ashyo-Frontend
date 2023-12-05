@@ -4,12 +4,11 @@
     <div
       class="flex justify-center items-center w-[202px] h-[170px] bg-[#EBEFF3]"
     >
-      <!-- <img
+      <img
         class="w-[115px] h-[115px]"
-        src="../../assets/single_phone.png"
+        :src="item?.product?.productMedia[0]?.url"
         alt=""
-      /> -->
-      <h1>{{ item.id }}</h1>
+      />
     </div>
 
     <!-- Main text -->
@@ -18,12 +17,12 @@
         <h3
           class="text-[18px] w-[288px] text-[#545D6A] font-normal not-italic leading-[24px]"
         >
-          Xiaomi 12 Lite
+          {{ item?.product?.name }}
         </h3>
         <h3
           class="text-[24px] font-bold not-italic leading-[118%] text-[#06172D]"
         >
-          2 470 000
+          {{ item?.product?.price }}
           <span class="text-[14px] text-[#000000] font-normal leading-[130%]"
             >UZS</span
           >
@@ -35,8 +34,20 @@
           <div
             class="flex w-[52px] rounded-[6px] h-[40px] justify-center cursor-pointer items-center bg-[#EBEFF3]"
           >
-            <SvgIcon type="mdi" :size="20" :path="mdiHeartOutline" />
+            <button
+              v-if="similar(item.product.id)"
+              @click="productStore.removeFromLikedProducts(item.product.id)"
+            >
+              <SvgIcon type="mdi" :path="mdiCardsHeart" class="text-[red]" />
+            </button>
+            <button
+              v-else
+              @click="productStore.addToLikedProducts(item.product.id)"
+            >
+              <SvgIcon type="mdi" :path="mdiHeartOutline" />
+            </button>
           </div>
+
           <div
             class="flex w-[52px] rounded-[6px] h-[40px] justify-center cursor-pointer items-center bg-[#EBEFF3]"
             @click="props.delete(item.id)"
@@ -75,42 +86,79 @@
 </template>
 
 <script setup lang="ts">
-  //@ts-ignore
-  import SvgIcon from "@jamescoyle/vue-icon";
-  import {
-    mdiHeartOutline,
-    mdiDeleteOutline,
-    mdiMinus,
-    mdiPlus,
-  } from "@mdi/js";
-  import { ref, onMounted } from "vue";
-  import { cartStore } from "@/store/cart.js";
+//@ts-ignore
+import SvgIcon from "@jamescoyle/vue-icon";
+import {
+  mdiHeartOutline,
+  mdiDeleteOutline,
+  mdiMinus,
+  mdiPlus,
+  mdiCardsHeart,
+} from "@mdi/js";
+import { ref, onMounted } from "vue";
+import { cartStore } from "@/store/cart.js";
+import { useAdminProductStore } from "../../store/products";
 
-  export interface IProduct {
-    item: {
+export interface IProduct {
+  item: {
+    id: number;
+    quantity: number;
+    product: {
       id: number;
-      quantity: number;
+      name: string;
+      price: string;
+      sale_price: string;
+      average_rating: string;
+      productMedia: [
+        {
+          url: string;
+        }
+      ];
+      productInfo: [
+        {
+          attribute_value: string;
+        }
+      ];
+      stock: {
+        quantity: number;
+      };
+
+      productmodel: {
+        model_name: string;
+      };
+
+      brand: { brand_name: string };
     };
-    delete: Function;
-  }
-  const props = defineProps<IProduct>();
-  const store = cartStore();
-
-  let quantity = ref(props.item.quantity);
-
-  const change = (action: string) => {
-    if (action == "add") {
-      store.addItem(props.item.id);
-      quantity.value = store.getItem(props.item.id)[0]["quantity"];
-    } else if (action == "remove") {
-      if (quantity.value > 1) {
-        store.removeItem(props.item.id);
-        quantity.value = store.getItem(props.item.id)[0]["quantity"];
-      }
-    } else {
-      return false;
-    }
   };
+  delete: Function;
+}
+const props = defineProps<IProduct>();
+const store = cartStore();
+const productStore = useAdminProductStore();
+
+let quantity = ref(props.item.quantity);
+
+const change = (action: string) => {
+  if (action == "add") {
+    store.addItem(props.item.id);
+    quantity.value = store.getItem(props.item.id)[0]["quantity"];
+  } else if (action == "remove") {
+    if (quantity.value > 1) {
+      store.removeItem(props.item.id);
+      quantity.value = store.getItem(props.item.id)[0]["quantity"];
+    }
+  } else {
+    return false;
+  }
+};
+const similar = (id: number) => {
+  //@ts-ignore
+  const answer = productStore?.liked?.filter((prod) => prod?.id == id);
+  if (answer?.length) {
+    return true;
+  }
+  return false;
+};
 </script>
 
 <style scoped></style>

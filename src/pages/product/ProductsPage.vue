@@ -25,66 +25,67 @@
         <div class="slider-demo-block">
           <el-slider v-model="value" range show-stops :max="1000" />
         </div>
-
       </div>
-
 
       <div>
         <h1 class="mb-3 font-medium">Brendi</h1>
         <div class="flex gap-3 flex-wrap">
           <div v-for="(brand, index) in brands" :key="index">
             <div>
-              <p class="bg-[#fff] px-3 p-2 rounded-full">{{ brand.brand_name }}</p>
+              <p class="bg-[#fff] px-3 p-2 rounded-full">
+                {{ brand.brand_name }}
+              </p>
             </div>
           </div>
         </div>
       </div>
-
 
       <div>
         <h1 class="mb-3 font-medium">Tezkor xotira RAM</h1>
         <div class="flex gap-3 flex-wrap">
           <div v-for="(ram, index) in rams" :key="index">
             <div>
-              <p class="bg-[#fff] px-3 p-2 rounded-full">{{ ram.ram_volume }} GB</p>
+              <p class="bg-[#fff] px-3 p-2 rounded-full">
+                {{ ram.ram_volume }} GB
+              </p>
             </div>
           </div>
         </div>
       </div>
-
 
       <div>
         <h1 class="mb-3 font-medium">Doimiy hotira ROM</h1>
         <div class="flex gap-3 flex-wrap">
           <div v-for="(rom, index) in roms" :key="index">
             <div>
-              <p class="bg-[#fff] px-3 p-2 rounded-full">{{ rom.rom_volume }} GB</p>
+              <p class="bg-[#fff] px-3 p-2 rounded-full">
+                {{ rom.rom_volume }} GB
+              </p>
             </div>
           </div>
         </div>
       </div>
-
 
       <div>
         <h1 class="mb-3 font-medium">Akkumulyator hajmi</h1>
         <div class="flex gap-3 flex-wrap">
           <div v-for="(mah, index) in mahs" :key="index">
             <div>
-              <p class="bg-[#fff] px-3 p-2 rounded-full">{{ mah.mah_volume }} mAh</p>
+              <p class="bg-[#fff] px-3 p-2 rounded-full">
+                {{ mah.mah_volume }} mAh
+              </p>
             </div>
           </div>
         </div>
       </div>
-
-
     </div>
     <div class="w-4/5">
       <div class="flex gap-10 flex-wrap">
-        <div v-for="(item, index) in items" :key="index">
+        <div v-for="(item, index) in productStore.searched" :key="index">
           <VCard :item="item"> </VCard>
         </div>
       </div>
-  </div>
+    </div>
   </div>
 </template>
 
@@ -93,6 +94,9 @@ import ProductCard from "@/components/form/VCard.vue";
 import { ref, watch } from "vue";
 const currentPage = ref(1);
 const value = ref([0, 1000]);
+import { useAdminProductStore } from "../../store/products";
+
+const productStore = useAdminProductStore();
 
 import VCard from "../../components/form/VCard.vue";
 
@@ -112,103 +116,102 @@ watch(value, (val) => {
 
 const brands = ref([
   {
-    brand_name:"Vivo"
+    brand_name: "Vivo",
   },
   {
-    brand_name:"Samsung"
+    brand_name: "Samsung",
   },
   {
-    brand_name:"Apple"
+    brand_name: "Apple",
   },
   {
-    brand_name:"Tecno"
+    brand_name: "Tecno",
   },
   {
-    brand_name:"Nokia"
+    brand_name: "Nokia",
   },
   {
-    brand_name:"Oppo"
+    brand_name: "Oppo",
   },
   {
-    brand_name:"Xiaomi"
+    brand_name: "Xiaomi",
   },
   {
-    brand_name:"Realmi"
+    brand_name: "Realmi",
   },
   {
-    brand_name:"Huawei"
+    brand_name: "Huawei",
   },
-])
+]);
 
 const rams = ref([
   {
-    ram_volume:2
-},
+    ram_volume: 2,
+  },
   {
-    ram_volume:3
-},
+    ram_volume: 3,
+  },
   {
-    ram_volume:4
-},
+    ram_volume: 4,
+  },
   {
-    ram_volume:6
-},
+    ram_volume: 6,
+  },
   {
-    ram_volume:8
-},
+    ram_volume: 8,
+  },
   {
-    ram_volume:12
-},
+    ram_volume: 12,
+  },
   {
-    ram_volume:16
-},
-])
+    ram_volume: 16,
+  },
+]);
 
 const roms = ref([
   {
-    rom_volume:32
-},
+    rom_volume: 32,
+  },
   {
-    rom_volume:64
-},
+    rom_volume: 64,
+  },
   {
-    rom_volume:128
-},
+    rom_volume: 128,
+  },
   {
-    rom_volume:256
-},
+    rom_volume: 256,
+  },
   {
-    rom_volume:512
-},
-])
-
+    rom_volume: 512,
+  },
+]);
 
 const mahs = ref([
   {
-    mah_volume:3000
-},
+    mah_volume: 3000,
+  },
   {
-    mah_volume:3200
-},
+    mah_volume: 3200,
+  },
   {
-    mah_volume:3600
-},
+    mah_volume: 3600,
+  },
   {
-    mah_volume:4000
-},
+    mah_volume: 4000,
+  },
   {
-    mah_volume:4500
-},
+    mah_volume: 4500,
+  },
   {
-    mah_volume:5000
-},
+    mah_volume: 5000,
+  },
   {
-    mah_volume:6000
-},
+    mah_volume: 6000,
+  },
   {
-    mah_volume:7000
-},
-])
+    mah_volume: 7000,
+  },
+]);
 
 const items = ref([
   {

@@ -10,13 +10,13 @@
       <div class="flex flex-col gap-[10px] overflow-y-auto h-[430px]">
         <div
           class="w-[120px] min-h-[100px] cursor-pointer bg-[#EBEFF3] flex justify-center items-center rounded-[6px]"
-          v-for="(item, index) in images"
-          :key="item"
-          @click="changeImage(item)"
+          v-for="(item, index) in product?.productMedia"
+          :key="item.url"
+          @click="changeImage(item.url)"
         >
           <img
             class="w-[54px] h-[54px] object-cover"
-            :src="item"
+            :src="item.url"
             alt="single"
           />
         </div>
@@ -32,12 +32,12 @@
             :path="mdiScaleUnbalanced"
             class="cursor-pointer"
           />
-          <SvgIcon
-            :size="24"
-            type="mdi"
-            :path="mdiHeartOutline"
-            class="cursor-pointer"
-          />
+          <button v-if="similar(id)" @click="store.removeFromLikedProducts(id)">
+            <SvgIcon type="mdi" :path="mdiCardsHeart" class="text-[red]" />
+          </button>
+          <button v-else @click="store.addToLikedProducts(id)">
+            <SvgIcon type="mdi" :path="mdiHeartOutline" />
+          </button>
         </div>
 
         <div class="flex justify-center items-center overflow-hidden">
@@ -70,17 +70,40 @@
           <p
             class="text-[16px] text-[#545D6A] font-normal not-italic leading-[130%] text-center"
           >
-            <!-- Oyiga {{ to_number(Math.round((price * 1) / 12).toString()) }} usz -->
-            dan muddatli to’lov
+            Oyiga {{ Math.round((product?.price * 1) / 6).toString() }} usz dan
+            muddatli to’lov
           </p>
         </button>
 
         <div class="flex mt-[10px] gap-[14px] flex-row">
+          <!-- <button
+            class="border bg-[#134E9B] border-[#134E9B] w-[230px] h-[56px] rounded-[6px]"
+            @click=""
+          >
+            <p
+              class="text-[16px] font-normal text-center not-italic leading-[130%] text-white"
+            >
+              Savatga qo'shish
+            </p>
+          </button> -->
           <button
-            class="border border-[#134E9B] w-[230px] h-[56px] rounded-[6px]"
+            v-if="findOut(id)"
+            class="border bg-[white] border-[#134E9B] w-[230px] h-[56px] rounded-[6px]"
+            @click="toCartPage"
           >
             <p
               class="text-[16px] font-normal text-center not-italic leading-[130%] text-[#134E9B]"
+            >
+              Savatga o'tish
+            </p>
+          </button>
+          <button
+            v-else
+            class="border bg-[#134E9B] border-[#134E9B] w-[230px] h-[56px] rounded-[6px]"
+            @click="addToCart(id)"
+          >
+            <p
+              class="text-[16px] font-normal text-center not-italic leading-[130%] text-white"
             >
               Savatga qo'shish
             </p>
@@ -206,13 +229,16 @@ import {
   mdiStoreOutline,
   mdiClockOutline,
   mdiAccountOutline,
+  mdiCardsHeart,
 } from "@mdi/js";
 //@ts-ignore
 import SvgIcon from "@jamescoyle/vue-icon";
 import { useAdminProductStore } from "../../store/products";
 
 import { ref, reactive, onMounted } from "vue";
-import { useRoute, type LocationQueryValue } from "vue-router";
+import { useRoute, type LocationQueryValue, useRouter } from "vue-router";
+import { cartStore } from "../../store/cart";
+import { danger, success } from "../../plugins/Notification";
 
 const store = useAdminProductStore();
 const name = ref("Smartfon Xiaomi 12 Lite 8/128Gb");
@@ -220,23 +246,27 @@ const price = ref("2470000");
 const isHovered = ref(false);
 const isActive = ref(false);
 const product = ref();
+const router = useRouter();
+const cart_store = cartStore();
 
 const route = useRoute();
 const id = ref<number | undefined>();
 
 id.value = Number(route.query.id?.toString());
 console.log(id.value);
+const main_image = ref("");
 
 onMounted(async () => {
   product.value = await store.findOne(id.value);
+  main_image.value = product.value?.productMedia[0]?.url;
 });
 
-const images = reactive([
-  "http://localhost:5173/src/assets/single_phone.png",
-  "http://localhost:5173/src/assets/tv.png",
-  "http://localhost:5173/src/assets/single_phone.png",
-  "http://localhost:5173/src/assets/single_phone.png",
-]);
+// const images = reactive([
+//   "http://localhost:5173/src/assets/single_phone.png",
+//   "http://localhost:5173/src/assets/tv.png",
+//   "http://localhost:5173/src/assets/single_phone.png",
+//   "http://localhost:5173/src/assets/single_phone.png",
+// ]);
 
 const characteristic = reactive([{ name: "Brand", value: "Vivo" }]);
 
@@ -268,8 +298,6 @@ const comments = reactive([
   },
 ]);
 
-const main_image = ref(images[0]);
-
 const changeImage = (image: any) => {
   main_image.value = image;
 };
@@ -289,6 +317,43 @@ const to_number = (number: string) => {
     count += 1;
   }
   return price.join("");
+};
+
+const findOut = (id: number | undefined) => {
+  const answer = cart_store?.items?.filter((prod) => prod.product_id == id);
+  if (answer?.length) {
+    return true;
+  }
+  return false;
+};
+const toCartPage = () => {
+  router.push({ path: "/cart" });
+};
+const ID = ref();
+const added = ref(false);
+const addToCart = async (id: any) => {
+  await cart_store.createCart({
+    product_id: id,
+    quantity: 1,
+  });
+  if (cart_store?.error) {
+    danger(cart_store?.error);
+    cart_store.error = null;
+  } else {
+    ID.value = id;
+    added.value = true;
+    localStorage.setItem("products", JSON.stringify(cart_store.items));
+    success("Product added to cart");
+  }
+};
+
+const similar = (id: number | undefined) => {
+  //@ts-ignore
+  const answer = store?.liked?.filter((prod) => prod?.id == id);
+  if (answer?.length) {
+    return true;
+  }
+  return false;
 };
 </script>
 
