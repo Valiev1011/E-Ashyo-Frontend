@@ -13,6 +13,7 @@ export const useAdminProductStore = defineStore("admin-product", {
     liked: [],
     products: [] as IProduct[],
     searched: [] as IProduct[],
+    filtered: [] as IProduct[],
   }),
   actions: {
     async lastViewedProducts() {
@@ -47,6 +48,21 @@ export const useAdminProductStore = defineStore("admin-product", {
       try {
         this.loading = true;
         const res = await productApi.getPopularProduct();
+        // this.popularProducts = res.;
+        console.log(res);
+        return res.filter((val) => val != null);
+      } catch (error) {
+        this.error = error?.response?.data;
+        console.log(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async getBrands() {
+      try {
+        this.loading = true;
+        const res = await productApi.getBrands();
         // this.popularProducts = res.;
         console.log(res);
         return res.filter((val) => val != null);
@@ -106,6 +122,22 @@ export const useAdminProductStore = defineStore("admin-product", {
           | IProduct[]
           | any;
         this.searched = products;
+        return products;
+      } catch (error) {
+        this.error = error?.response?.data;
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async productFilter(payload: object) {
+      try {
+        this.loading = true;
+        console.log("balki kiryapkandir", payload);
+        const products = (await productApi.productFilter(payload)) as
+          | IProduct[]
+          | any;
+        this.filtered = products;
         return products;
       } catch (error) {
         this.error = error?.response?.data;

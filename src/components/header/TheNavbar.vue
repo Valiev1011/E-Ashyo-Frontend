@@ -83,15 +83,14 @@
             >
               <!-- <h2>Categories</h2> -->
               <div
-                v-for="category in value"
-                :key="category?.id"
+                v-for="cat in category"
+                :key="cat?.id"
                 class="flex flex-col cursor-pointer"
                 id=""
               >
                 <p
-                  v-if="category?.parent_category_id === null"
-                  class="flex gap-4 py-3 hover:bg-[#fff]"
-                  @mouseover="setHoveredCategory(category)"
+                  class="flex gap-4 py-3 hover:bg-[#fff] hover:font-bold "
+                  @mouseover="setHoveredCategory(cat)"
                   id=""
                 >
                   <img
@@ -99,21 +98,21 @@
                     alt="icon"
                     id=""
                   />
-                  {{ category?.category_name }}
+                  {{ cat?.category_name }}
                 </p>
               </div>
             </div>
             <div class="w-3/5 bg-[white] px-16 py-10 flex flex-col gap-2" id="">
-              <p class="font-bold" id="">Smartfonlar</p>
+              <p class="font-bold" id=""></p>
               <ul
                 class="flex flex-col cursor-pointer"
-                v-for="attribute in value"
+                v-for="attribute in sub_category"
                 :key="attribute.id"
                 id=""
               >
                 <li
-                  v-if="hoveredCategory === attribute?.parent_category_id"
-                  class="flex gap-4 px-3 py-3 hover:bg-[#EBEFF3]"
+
+                  class="flex gap-4 px-3 py-3 hover:bg-[#EBEFF3] hover:font-bold "
                   id=""
                 >
                   {{ attribute?.category_name }}
@@ -124,7 +123,7 @@
           </div>
         </div>
         <div class="flex">
-          <form action="#">
+          <form @submit.prevent>
             <input
               type="text"
               class="border rounded-l-md bg-[#EBEFF3] pr-56 pl-10 pt-3 pb-3 outline-none"
@@ -189,9 +188,8 @@
       </div>
     </div>
     <div class="w-full flex pl-20 gap-5">
-      <ol class="flex" v-for="item in value" :key="item.id">
+      <ol class="flex" v-for="item in category" :key="item.id">
         <li
-          v-if="item.parent_category_id === null"
           class="text-[#545D6A] hover:underline hover:text-black cursor-pointer"
         >
           {{ item.category_name }}
@@ -343,6 +341,8 @@ const cart_store = cartStore()
 const secondModal = ref(false)
 
 const value = ref();
+const category = ref()
+const sub_category=ref()
 const options = [{ value: "smart", label: "smart" }];
 const open = ref(false);
 const modal = ref(false);
@@ -406,10 +406,13 @@ const clicked = () => {
   console.log(open.value);
 };
 
+
 onMounted(async () => {
   value.value = await categoryStore.getCategories();
   await cart_store.getCart();
+  category.value = value.value.filter((cat:any)=>cat?.parent_category_id === null)
 
+  sub_category.value = value.value.filter((sub:any)=>sub.parent_category_id !== null)
   localStorage.setItem("products",JSON.stringify(cart_store.items))
 });
 
@@ -423,7 +426,9 @@ const findProducts=async(input:any)=>{
 const hoveredCategory = ref();
 
 const setHoveredCategory = (category: any) => {
-  hoveredCategory.value = category.id;
+  // hoveredCategory.value = category.id;
+  sub_category.value = value.value.filter((sub:any)=>sub.parent_category_id === category.id)
+
 };
 
 const gotoScaleUnbalanced = () => {

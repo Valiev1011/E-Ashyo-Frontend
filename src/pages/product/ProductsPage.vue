@@ -23,7 +23,12 @@
           </div>
         </div>
         <div class="slider-demo-block">
-          <el-slider v-model="value" range show-stops :max="1000" />
+          <el-slider
+            v-model="value"
+            range
+            :max="10000000"
+            @change="handleSliderStop"
+          />
         </div>
       </div>
 
@@ -32,9 +37,20 @@
         <div class="flex gap-3 flex-wrap">
           <div v-for="(brand, index) in brands" :key="index">
             <div>
-              <p class="bg-[#fff] px-3 p-2 rounded-full">
+              <p
+                class="bg-[#fff] px-3 p-2 rounded-full cursor-pointer"
+                :class="brandId == brand.id ? 'bg-[blue]' : ''"
+                @click="setBrand(brand.id)"
+              >
                 {{ brand.brand_name }}
               </p>
+              <!-- <p
+                class="bg-[#fff] px-3 p-2 rounded-full cursor-pointer"
+                :class="brandId != null ? 'bg-[blue]' : ''"
+                @click="setBrand(brand.id)"
+              >
+                {{ brand.brand_name }}
+              </p> -->
             </div>
           </div>
         </div>
@@ -91,58 +107,74 @@
 
 <script setup lang="ts">
 import ProductCard from "@/components/form/VCard.vue";
-import { ref, watch } from "vue";
+import { ref, watch, toRefs, reactive, onMounted } from "vue";
 const currentPage = ref(1);
-const value = ref([0, 1000]);
+const value = ref([0, 10000000]);
 import { useAdminProductStore } from "../../store/products";
-
+import { useRoute } from "vue-router";
 const productStore = useAdminProductStore();
+const route = useRoute();
 
 import VCard from "../../components/form/VCard.vue";
 
-const max = ref(1000);
+const data = reactive({ value: 0 });
+const max = ref(10000);
 const min = ref(0);
 // const value = ref([0, 1000000]);
-watch(value, (val) => {
-  console.log(val);
-  if (val[0] > val[1]) {
-    min.value = val[1];
-    max.value = val[0];
-  } else {
-    min.value = val[0];
-    max.value = val[1];
-  }
+const filter = ref();
+// watch(value, async (val) => {
+//   filter.value = await productStore.productFilter({
+//     price: { from: val[0], to: val[1] },
+//   });
+// });
+const brands = ref(null);
+onMounted(async () => {
+  brands.value = await productStore.getBrands();
 });
+const brandId = ref();
+const setBrand = (id: number) => {
+  brandId.value = id;
+  handleSliderStop();
+};
 
-const brands = ref([
-  {
-    brand_name: "Vivo",
-  },
-  {
-    brand_name: "Samsung",
-  },
-  {
-    brand_name: "Apple",
-  },
-  {
-    brand_name: "Tecno",
-  },
-  {
-    brand_name: "Nokia",
-  },
-  {
-    brand_name: "Oppo",
-  },
-  {
-    brand_name: "Xiaomi",
-  },
-  {
-    brand_name: "Realmi",
-  },
-  {
-    brand_name: "Huawei",
-  },
-]);
+async function handleSliderStop() {
+  // This method will be called after the user stops sliding
+  // You can send your request to the backend here
+  filter.value = await productStore.productFilter({
+    price: { from: value.value[0], to: value.value[1] },
+    brand_id: brandId.value,
+  });
+}
+
+// const brands = ref([
+//   {
+//     brand_name: "Vivo",
+//   },
+//   {
+//     brand_name: "Samsung",
+//   },
+//   {
+//     brand_name: "Apple",
+//   },
+//   {
+//     brand_name: "Tecno",
+//   },
+//   {
+//     brand_name: "Nokia",
+//   },
+//   {
+//     brand_name: "Oppo",
+//   },
+//   {
+//     brand_name: "Xiaomi",
+//   },
+//   {
+//     brand_name: "Realmi",
+//   },
+//   {
+//     brand_name: "Huawei",
+//   },
+// ]);
 
 const rams = ref([
   {
@@ -273,5 +305,6 @@ const items = ref([
 .slider-demo-block .el-slider {
   margin-top: 0;
   margin-left: 12px;
+  z-index: 0;
 }
 </style>

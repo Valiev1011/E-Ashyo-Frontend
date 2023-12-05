@@ -25,6 +25,11 @@ export const productApi = {
     return axiosClient.get(url);
   },
 
+  getBrands(): Promise<Array<object[]>> {
+    const url = `brand/get-all`;
+    return axiosClient.get(url);
+  },
+
   findProductOnStorage(id: Array<number>) {
     const url = `product/find`;
     console.log(id);
@@ -34,6 +39,12 @@ export const productApi = {
   productSearch(payload: object) {
     const url = `product/search`;
     // console.log(payload);
+    return axiosClient.post(url, payload);
+  },
+
+  productFilter(payload: object) {
+    const url = `product/filter`;
+    console.log("buyergachi", payload);
     return axiosClient.post(url, payload);
   },
 };
