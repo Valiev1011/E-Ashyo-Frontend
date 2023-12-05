@@ -74,92 +74,93 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineProps, onMounted, ref } from "vue";
-import shop_bag from "../../assets/shopping-bag.vue";
-import tarozi from "../../assets/la_balance-scale-right.vue";
-import heart from "../../assets/heart.vue";
-import { useRouter } from "vue-router";
+  import { defineProps, onMounted, ref } from "vue";
+  import shop_bag from "../../assets/shopping-bag.vue";
+  import tarozi from "../../assets/la_balance-scale-right.vue";
+  import heart from "../../assets/heart.vue";
+  import { useRouter } from "vue-router";
 
-export interface IProps {
-  item: {
-    id: number;
-    name: string;
-    price: number;
-    sale_price: number;
-    average_rating: number;
-    productMedia: [{ url: string }];
-    brand: {
-      brand_name: string;
+  export interface IProps {
+    item: {
+      id: number;
+      name: string;
+      price: number;
+      sale_price: number;
+      average_rating: number;
+      productMedia: [{ url: string }];
+      brand: {
+        brand_name: string;
+      };
     };
-  };
-}
-import { mdiHeartOutline, mdiCardsHeart, mdiCheck } from "@mdi/js";
-import { useAdminProductStore } from "../../store/products";
-//@ts-ignore
-import { danger, warning, success } from "../../plugins/Notification.ts";
-
-import { cartStore } from "../../store/cart";
-//@ts-ignore
-import SvgIcon from "@jamescoyle/vue-icon";
-
-const like = ref(false);
-const router = useRouter();
-const props = defineProps<IProps>();
-
-const store = useAdminProductStore();
-const cart_store = cartStore();
-// console.log(props.item.productMedia.url);
-
-const similar = (id: number) => {
+  }
+  import { mdiHeartOutline, mdiCardsHeart, mdiCheck } from "@mdi/js";
+  import { useAdminProductStore } from "../../store/products";
   //@ts-ignore
-  const answer = store?.liked?.filter((prod) => prod?.id == id);
-  if (answer?.length) {
-    return true;
-  }
-  return false;
-};
+  import { danger, warning, success } from "../../plugins/Notification.ts";
 
-const findOut = (id: number) => {
-  const answer = cart_store?.items?.filter((prod) => prod.product_id == id);
-  if (answer?.length) {
-    return true;
-  }
-  return false;
-};
-const user_id = ref();
-onMounted(() => {
-  const storedLikedProducts = localStorage.getItem("likedProducts");
-  user_id.value = localStorage.getItem("user_id");
-  if (storedLikedProducts) {
-    store.liked = JSON.parse(storedLikedProducts);
-  }
-  localStorage.setItem("products", JSON.stringify(cart_store.items));
-});
+  import { cartStore } from "../../store/cart";
+  //@ts-ignore
+  import SvgIcon from "@jamescoyle/vue-icon";
 
-const added = ref(false);
-const ID = ref();
+  const like = ref(false);
+  const router = useRouter();
+  const props = defineProps<IProps>();
 
-const addToCart = async (id: any) => {
-  await cart_store.createCart({
-    product_id: id,
-    quantity: 1,
-  });
-  if (cart_store?.error) {
-    danger(cart_store?.error);
-    cart_store.error = null;
-  } else {
-    ID.value = id;
-    added.value = true;
+  console.log(props.item);
+  const store = useAdminProductStore();
+  const cart_store = cartStore();
+  // console.log(props.item.productMedia.url);
+
+  const similar = (id: number) => {
+    //@ts-ignore
+    const answer = store?.liked?.filter((prod) => prod?.id == id);
+    if (answer?.length) {
+      return true;
+    }
+    return false;
+  };
+
+  const findOut = (id: number) => {
+    const answer = cart_store?.items?.filter((prod) => prod.product_id == id);
+    if (answer?.length) {
+      return true;
+    }
+    return false;
+  };
+  const user_id = ref();
+  onMounted(() => {
+    const storedLikedProducts = localStorage.getItem("likedProducts");
+    user_id.value = localStorage.getItem("user_id");
+    if (storedLikedProducts) {
+      store.liked = JSON.parse(storedLikedProducts);
+    }
     localStorage.setItem("products", JSON.stringify(cart_store.items));
-    success("Product added to cart");
-  }
-};
-const toCartPage = () => {
-  router.push({ path: "/cart" });
-};
+  });
 
-const toSinglePage = (id: number) => {
-  router.push({ name: "singleProduct", query: { id } });
-};
+  const added = ref(false);
+  const ID = ref();
+
+  const addToCart = async (id: any) => {
+    await cart_store.createCart({
+      product_id: id,
+      quantity: 1,
+    });
+    if (cart_store?.error) {
+      danger(cart_store?.error);
+      cart_store.error = null;
+    } else {
+      ID.value = id;
+      added.value = true;
+      localStorage.setItem("products", JSON.stringify(cart_store.items));
+      success("Product added to cart");
+    }
+  };
+  const toCartPage = () => {
+    router.push({ path: "/cart" });
+  };
+
+  const toSinglePage = (id: number) => {
+    router.push({ name: "singleProduct", query: { id } });
+  };
 </script>
 <style scoped></style>
