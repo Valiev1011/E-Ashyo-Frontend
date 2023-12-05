@@ -27,7 +27,7 @@
             </div>
             <div class="w-[550px] h-[100%] relative">
               <img
-                class="h-[450px] w-[100%] object-cover"
+                class="h-[450px] w-[900%] object-cover"
                 :src="img.content"
                 alt="Slide Image"
               />
@@ -64,13 +64,13 @@
     {
       text: "iPhone 15 Pro",
       desc: "iPhone 15 Pro: Katta o‘nlayn muhit, kuchli kamera va tez ishlovchi kuchli texnologiyalar bilan yaratilgan.",
-      content: "src/assets/images/product-imgs/Apple-iPhone-15-transformed.png",
+      content: "src/assets/img/iPhone-15.png",
       bgColor: "#DBBE6E",
     },
     {
       text: "Samsung S21 plus",
       desc: "Galaxy S21 Plus: Yorqin ekran, kuchli kamera to'plami va tez ishlovchi hisoblanadi, dizayn va kuchli xususiyatlar bilan ajralgan.",
-      content: "src/assets/images/product-imgs/Remove-bg.ai_1700109929119.png",
+      content: "src/assets/img/samsung.png",
       bgColor: "#A7C9C4",
     },
     {
