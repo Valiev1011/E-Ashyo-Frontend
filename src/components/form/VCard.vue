@@ -106,6 +106,7 @@
   const router = useRouter();
   const props = defineProps<IProps>();
 
+  console.log(props.item);
   const store = useAdminProductStore();
   const cart_store = cartStore();
   // console.log(props.item.productMedia.url);
