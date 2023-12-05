@@ -6,7 +6,7 @@
           <img src="../../assets/artel.png" alt="logo" />
         </div>
         <div class="tall" style="background: rgba(0, 0, 0, 0.1)">
-          <img src="../../assets/apple.png" alt="logo" />
+          <img src="../../assets/apple.png" alt="logo" @click="gotoproductbrand"/>
         </div>
       </div>
       <div class="base">
@@ -40,7 +40,15 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+
+const gotoproductbrand = () => {
+  router.push({path : '/product-brand'})
+}
+</script>
 
 <style scoped>
   .base {
