@@ -1,9 +1,22 @@
 <template>
   <div class="container pl-[100px]">
 
-    <div>
-      <div>
+    <div class="flex py-8 gap-5">
+      <div class="w-[140px] h-[100px] flex flex-col justify-center items-center bg-[#EBEFF3] rounded">
         <img src="http://localhost:5173/src/assets/iPad.png" alt="iPad">
+        <p class="text-center">iPad</p>
+      </div>
+      <div class="w-[140px] h-[100px] flex flex-col justify-center items-center bg-[#EBEFF3] rounded">
+        <img src="http://localhost:5173/src/assets/Macbook.png" alt="MacBook">
+        <p>MacBook</p>
+      </div>
+      <div class="w-[140px] h-[100px] flex flex-col justify-center items-center bg-[#EBEFF3] rounded">
+        <img src="http://localhost:5173/src/assets/iWatch.png" alt="iWatch">
+        <p>iWatch</p>
+      </div>
+      <div class="w-[140px] h-[100px] flex flex-col justify-center items-center bg-[#EBEFF3] rounded">
+        <img src="http://localhost:5173/src/assets/iMac.png" alt="iMac">
+        <p>iMac</p>
       </div>
     </div>
 

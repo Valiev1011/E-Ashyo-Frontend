@@ -163,9 +163,9 @@
         class="flex mt-[70px] w-[651px] mb-[20px] flex-col overflow-auto max-h-[500px] no-scrollbar"
         v-if="!isActive"
       >
-        <div class="flex flex-wrap">
-          <h2 class="w-[378px]">Brand</h2>
-          <h2>{{ product?.brand?.brand_name }}</h2>
+        <div class="flex flex-wrap" v-for="item in product?.productInfo">
+          <h2 class="w-[378px] font-bold">{{ item.attribute?.name }}</h2>
+          <h2>{{ item.attribute_value }}</h2>
           <div
             class="w-[651px] my-[13px] border-dashed border-b-[2px] border-[#B6BABF]"
           ></div>
