@@ -1,26 +1,5 @@
 # e-ashyo
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
 ## Project Setup
 
 ```sh
@@ -38,3 +17,16 @@ npm run dev
 ```sh
 npm run build
 ```
+![telegram-cloud-photo-size-2-5253938677955023269-y](https://github.com/Valiev1011/E-Ashyo-Frontend/assets/135142785/9b20277f-6750-4dd9-95db-2d9d29f15ea9)
+![telegram-cloud-photo-size-2-5253938677955023271-y](https://github.com/Valiev1011/E-Ashyo-Frontend/assets/135142785/0ee9b4bc-c0ce-4520-81e8-3e5509ed6ec6)
+![telegram-cloud-photo-size-2-5253938677955023246-y](https://github.com/Valiev1011/E-Ashyo-Frontend/assets/135142785/1b063112-e5a1-491f-a2c6-809092de9c3b)
+![telegram-cloud-photo-size-2-5253938677955023247-y](https://github.com/Valiev1011/E-Ashyo-Frontend/assets/135142785/f29e71c7-51da-4a42-92c5-b2de9a6a7ff8)
+![telegram-cloud-photo-size-2-5253938677955023248-y](https://github.com/Valiev1011/E-Ashyo-Frontend/assets/135142785/6ac596e0-01f1-4f84-ac54-ec0c3676c1ee)
+![telegram-cloud-photo-size-2-5253938677955023250-y](https://github.com/Valiev1011/E-Ashyo-Frontend/assets/135142785/ce862eb2-0f6c-484c-9fb3-efa568d80fa3)
+![telegram-cloud-photo-size-2-5253938677955023251-y](https://github.com/Valiev1011/E-Ashyo-Frontend/assets/135142785/5fe93180-941f-42f6-b016-ae76f43cf8df)
+
+
+
+
+
+
